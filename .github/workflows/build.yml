@@ -1,20 +1,102 @@
 name: Build Debian Package
 
 on:
+  repository_dispatch:
+    types: [release-tagged]
   workflow_dispatch:
     inputs:
         tag:
-            description: 'Tag to build'
+            description: 'Version to build'
             required: true
-            default: 'v1.0.2'
+            default: 'v1.0.0'
         project: 
             description: 'Project to build'
             required: true
             default: 'renterd'
+        description:
+            description: 'Description of the project'
+            required: true
+            default: 'Renterd: The Next-Gen Sia Renter'
 
 jobs:
   build:
       runs-on: ubuntu-latest
       steps:
-        - name: Placeholder
-          run: echo "hello world"
+        - name: Store input in env
+          run: |
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+              echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
+              echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
+            elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+              echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
+              echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
+              echo "DESCRIPTION=${{ github.event.client_payload.description }}" >> $GITHUB_ENV
+            fi
+            echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
+
+        - name: Checkout packages
+          uses: actions/checkout@v3
+
+        - name: Checkout src code into tmp folder
+          uses: actions/checkout@v3
+          with:
+            repository: SiaFoundation/${{ env.PROJECT }}
+            ref: ${{ env.RELEASE_TAG }}
+            path: "tmp"
+
+        - name: Build .deb Package
+          run: |
+            TAG=${{ env.RELEASE_TAG }}
+            VERSION=${TAG:1}
+
+            # Move into the tmp directory
+            cd tmp
+
+            go generate ./...
+            for arch in amd64 arm64; do
+                BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
+
+                # Create the directory structure for the .deb package
+                mkdir -p ${BUILD_NAME}/DEBIAN
+                mkdir -p ${BUILD_NAME}/usr/bin
+
+                # Build the ${{ env.PROJECT }} binary
+                GOOS=linux GOARCH=${arch} go build -tags='netgo' -o ${BUILD_NAME}/usr/bin/${{ env.PROJECT }} -a -ldflags='-s -w' ./cmd/${{ env.PROJECT }}
+
+                # Create the control file
+                echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
+                echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
+            
+                # Build the .deb file
+                echo "Building ${BUILD_NAME}.deb"
+                dpkg-deb --build ${BUILD_NAME}
+
+                # Move the .deb file
+                mv ${BUILD_NAME}.deb ../debian/pool/main/${{ env.PROJECT }}/
+
+                # Remove the temporary folders
+                rm -rf ${BUILD_NAME}
+
+                # Update the Packages file
+                mkdir -p debian/dists/stable/main/binary-${arch}
+                dpkg-scanpackages ../debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
+            done
+
+            # Move out of tmp and delete it
+            cd ../
+            rm -rf tmp
+
+        - name: Create Pull Request
+          uses: peter-evans/create-pull-request@v5.0.2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
+            title: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
+            body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
+            branch: ${{ env.PROJECT }}/update
+            base: master
