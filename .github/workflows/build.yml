@@ -1,0 +1,20 @@
+name: Build Debian Package
+
+on:
+  workflow_dispatch:
+    inputs:
+        tag:
+            description: 'Tag to build'
+            required: true
+            default: 'v1.0.2'
+        project: 
+            description: 'Project to build'
+            required: true
+            default: 'renterd'
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Placeholder
+          run: echo "hello world"
