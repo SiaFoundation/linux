@@ -73,7 +73,6 @@ jobs:
                 # Copy the ${{ env.PROJECT }} binary
                 unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
                 cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
-                GOOS=linux GOARCH=${arch} go build -tags='netgo' -o ${BUILD_NAME}/usr/bin/${{ env.PROJECT }} -a -ldflags='-s -w' ./cmd/${{ env.PROJECT }}
 
                 # Create the control file
                 echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
@@ -98,9 +97,8 @@ jobs:
                 dpkg-scanpackages ../debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
             done
 
-            # Move out of tmp and delete it
-            cd ../
-            rm -rf tmp
+            # Delete artifacts folder
+            rm -rf ./artifacts
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
