@@ -56,13 +56,14 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip dpkg-dev git
+            apt update && apt install -y unzip build-essential
 
         - name: Build .deb Package
           shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
+            find .
 
             for arch in amd64 arm64; do
                 BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
