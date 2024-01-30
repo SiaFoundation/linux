@@ -87,14 +87,14 @@ jobs:
                 dpkg-deb --build ${BUILD_NAME}
 
                 # Move the .deb file
-                mv ${BUILD_NAME}.deb ../debian/pool/main/${{ env.PROJECT }}/
+                mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
 
                 # Remove the temporary folders
                 rm -rf ${BUILD_NAME}
 
                 # Update the Packages file
                 mkdir -p debian/dists/stable/main/binary-${arch}
-                dpkg-scanpackages ../debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
+                dpkg-scanpackages ./debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
             done
 
             # Delete artifacts folder
