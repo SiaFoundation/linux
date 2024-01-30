@@ -25,6 +25,7 @@ on:
 jobs:
   build:
       runs-on: ubuntu-latest
+      container: debian:stable-slim
       steps:
         - name: Store input in env
           run: |
