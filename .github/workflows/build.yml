@@ -42,6 +42,13 @@ jobs:
             fi
             echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
 
+        - name: Install dependencies
+          run: |
+            apt update && apt install -y unzip dpkg-dev git
+
+        - name: Checkout repo
+          uses: actions/checkout@v3
+
         - name: Download release artifacts from workflow
           uses: dawidd6/action-download-artifact@v3
           with: 
@@ -51,12 +58,6 @@ jobs:
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
 
-        - name: Install dependencies
-          run: |
-            apt update && apt install -y unzip dpkg-dev git
-
-        - name: Checkout repo
-          uses: actions/checkout@v3
 
         - name: Build .deb Package
           shell: bash
