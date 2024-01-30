@@ -59,9 +59,6 @@ jobs:
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
-            # DEBUG: list files
-            find .
-
             go generate ./...
             for arch in amd64 arm64; do
                 BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
@@ -81,6 +78,29 @@ jobs:
                 echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
                 echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
                 echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
+
+                # Create systemd service file
+                echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                # Create the prerem script
+                echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
+                echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+                echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+                chmod +x ${BUILD_NAME}/DEBIAN/prerm
             
                 # Build the .deb file
                 echo "Building ${BUILD_NAME}.deb"
