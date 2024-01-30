@@ -48,7 +48,6 @@ jobs:
           uses: dawidd6/action-download-artifact@v3
           with: 
             name: ${{ env.PROJECT }}
-            name_is_regex: true
             path: artifacts
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
