@@ -8,7 +8,7 @@ on:
         tag:
             description: 'Version to build'
             required: true
-            default: 'v1.0.0'
+            default: 'v1.0.2'
         project: 
             description: 'Project to build'
             required: true
@@ -20,7 +20,7 @@ on:
         workflow_id:
             description: 'Workflow ID from which to download the artifact'
             required: true
-            default: ''
+            default: '7582058971'
 
 jobs:
   build:
