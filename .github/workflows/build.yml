@@ -20,7 +20,7 @@ on:
         workflow_id:
             description: 'Workflow ID from which to download the artifact'
             required: true
-            default: 'build-debian-package.yml'
+            default: ''
 
 jobs:
   build:
@@ -48,7 +48,9 @@ jobs:
           uses: dawidd6/action-download-artifact@v3
           with: 
             name: ${{ env.PROJECT }}
+            repo: github.com/SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
+            workflow_conclusion: success
 
         - name: Build .deb Package
           run: |
