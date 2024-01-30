@@ -53,14 +53,13 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip build-essential
+            apt update && apt install -y unzip dpkg-dev git
 
         - name: Build .deb Package
           shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
-            find .
 
             for arch in amd64 arm64; do
                 BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
@@ -123,8 +122,6 @@ jobs:
 
             # Delete artifacts folder
             rm -rf ./artifacts
-
-            find .
 
         - name: Checkout repo
           uses: actions/checkout@v3
