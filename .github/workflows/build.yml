@@ -47,7 +47,8 @@ jobs:
         - name: Download release artifacts from workflow
           uses: dawidd6/action-download-artifact@v3
           with: 
-            name: ${{ env.PROJECT }}
+            name: ${{ env.PROJECT }}_linux_.+
+            name_is_regex: true
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
