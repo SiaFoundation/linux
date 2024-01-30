@@ -56,7 +56,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip
+            apt update && apt install -y unzip dpkg-dev
 
         - name: Build .deb Package
           shell: bash
