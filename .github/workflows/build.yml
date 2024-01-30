@@ -25,7 +25,7 @@ on:
 jobs:
   build:
       runs-on: ubuntu-latest
-      container: debian:stable-slim
+      container: debian:stable
       steps:
         - name: Store input in env
           run: |
@@ -55,6 +55,7 @@ jobs:
             workflow_conclusion: success
 
         - name: Build .deb Package
+          shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
