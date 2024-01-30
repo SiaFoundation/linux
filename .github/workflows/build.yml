@@ -55,6 +55,9 @@ jobs:
           run: |
             apt update && apt install -y unzip dpkg-dev git
 
+        - name: Checkout repo
+          uses: actions/checkout@v3
+
         - name: Build .deb Package
           shell: bash
           run: |
@@ -122,9 +125,6 @@ jobs:
 
             # Delete artifacts folder
             rm -rf ./artifacts
-
-        - name: Checkout repo
-          uses: actions/checkout@v3
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
