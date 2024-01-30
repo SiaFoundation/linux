@@ -17,6 +17,10 @@ on:
             description: 'Description of the project'
             required: true
             default: 'Renterd: The Next-Gen Sia Renter'
+        workflow_id:
+            description: 'Workflow ID from which to download the artifact'
+            required: true
+            default: 'build-debian-package.yml'
 
 jobs:
   build:
@@ -28,30 +32,31 @@ jobs:
               echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
               echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
               echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
+              echo "WORKFLOW_ID=${{ github.event.inputs.workflow_id }}" >> $GITHUB_ENV
             elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
               echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
               echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
               echo "DESCRIPTION=${{ github.event.client_payload.description }}" >> $GITHUB_ENV
+              echo "WORKFLOW_ID=${{ github.event.client_payload.workflow_id }}" >> $GITHUB_ENV
             fi
             echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
 
-        - name: Checkout packages
+        - name: Checkout repo
           uses: actions/checkout@v3
 
-        - name: Checkout src code into tmp folder
-          uses: actions/checkout@v3
-          with:
-            repository: SiaFoundation/${{ env.PROJECT }}
-            ref: ${{ env.RELEASE_TAG }}
-            path: "tmp"
+        - name: Download release artifacts from workflow
+          uses: dawidd6/action-download-artifact@v3
+          with: 
+            name: ${{ env.PROJECT }}
+            run_id: ${{ env.WORKFLOW_ID }}
 
         - name: Build .deb Package
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
-            # Move into the tmp directory
-            cd tmp
+            # DEBUG: list files
+            find .
 
             go generate ./...
             for arch in amd64 arm64; do
@@ -61,7 +66,8 @@ jobs:
                 mkdir -p ${BUILD_NAME}/DEBIAN
                 mkdir -p ${BUILD_NAME}/usr/bin
 
-                # Build the ${{ env.PROJECT }} binary
+                # Copy the ${{ env.PROJECT }} binary
+                cp ${{ env.PROJECT }}/${{ env.PROJECT }}_linux_${arch} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
                 GOOS=linux GOARCH=${arch} go build -tags='netgo' -o ${BUILD_NAME}/usr/bin/${{ env.PROJECT }} -a -ldflags='-s -w' ./cmd/${{ env.PROJECT }}
 
                 # Create the control file
