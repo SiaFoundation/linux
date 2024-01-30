@@ -126,6 +126,8 @@ jobs:
             # Delete artifacts folder
             rm -rf ./artifacts
 
+            find .
+
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
           with:
