@@ -47,8 +47,9 @@ jobs:
         - name: Download release artifacts from workflow
           uses: dawidd6/action-download-artifact@v3
           with: 
-            name: ${{ env.PROJECT }}_linux_.+
+            name: ${{ env.PROJECT }}
             name_is_regex: true
+            path: artifacts
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
@@ -70,7 +71,8 @@ jobs:
                 mkdir -p ${BUILD_NAME}/usr/bin
 
                 # Copy the ${{ env.PROJECT }} binary
-                cp ${{ env.PROJECT }}/${{ env.PROJECT }}_linux_${arch} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+                unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+                cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
                 GOOS=linux GOARCH=${arch} go build -tags='netgo' -o ${BUILD_NAME}/usr/bin/${{ env.PROJECT }} -a -ldflags='-s -w' ./cmd/${{ env.PROJECT }}
 
                 # Create the control file
