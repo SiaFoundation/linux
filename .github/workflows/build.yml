@@ -48,7 +48,7 @@ jobs:
           uses: dawidd6/action-download-artifact@v3
           with: 
             name: ${{ env.PROJECT }}
-            repo: github.com/SiaFoundation/${{ env.PROJECT }}
+            repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
 
@@ -100,7 +100,7 @@ jobs:
             rm -rf tmp
 
         - name: Create Pull Request
-          uses: peter-evans/create-pull-request@v5.0.2
+          uses: peter-evans/create-pull-request@v5
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
