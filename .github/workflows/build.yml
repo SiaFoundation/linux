@@ -54,11 +54,13 @@ jobs:
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
 
+        - name: Install dependencies
+          run: |
+            apt update && apt install -y unzip
+
         - name: Build .deb Package
           shell: bash
           run: |
-            apt install -y unzip
-
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
