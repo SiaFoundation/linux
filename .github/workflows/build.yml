@@ -42,9 +42,6 @@ jobs:
             fi
             echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
 
-        - name: Checkout repo
-          uses: actions/checkout@v3
-
         - name: Download release artifacts from workflow
           uses: dawidd6/action-download-artifact@v3
           with: 
@@ -128,6 +125,9 @@ jobs:
             rm -rf ./artifacts
 
             find .
+
+        - name: Checkout repo
+          uses: actions/checkout@v3
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
