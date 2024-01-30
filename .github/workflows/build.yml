@@ -57,6 +57,8 @@ jobs:
         - name: Build .deb Package
           shell: bash
           run: |
+            apt install -y unzip
+
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
@@ -69,7 +71,7 @@ jobs:
                 mkdir -p ${BUILD_NAME}/etc/systemd/system
 
                 # Copy the ${{ env.PROJECT }} binary
-                tar -xzf ./artifacts/${{ env.PROJECT }}_linux_${arch}.tar.gz -C ./artifacts/${arch}/
+                unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
                 cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
 
                 # Create the control file
