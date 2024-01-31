@@ -13,8 +13,3 @@ Simply add this repo to your sources by running the following command
 ```bash
 echo "deb [trusted=yes] https://siafoundation.github.io/linux/debian stable main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
 ```
-
-### TODOs
-
-- Enable GitHub pages to get link working
-- Add gpg key to get rid of `trusted=yes`
