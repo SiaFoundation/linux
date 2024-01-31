@@ -1,20 +1,138 @@
 name: Build Debian Package
 
 on:
+  repository_dispatch:
+    types: [release-tagged]
   workflow_dispatch:
     inputs:
         tag:
-            description: 'Tag to build'
+            description: 'Version to build'
             required: true
             default: 'v1.0.2'
         project: 
             description: 'Project to build'
             required: true
             default: 'renterd'
+        description:
+            description: 'Description of the project'
+            required: true
+            default: 'Renterd: The Next-Gen Sia Renter'
+        workflow_id:
+            description: 'Workflow ID from which to download the artifact'
+            required: true
+            default: '7582058971'
 
 jobs:
   build:
       runs-on: ubuntu-latest
+      container: debian:stable
       steps:
-        - name: Placeholder
-          run: echo "hello world"
+        - name: Store input in env
+          run: |
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+              echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
+              echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
+              echo "WORKFLOW_ID=${{ github.event.inputs.workflow_id }}" >> $GITHUB_ENV
+            elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+              echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
+              echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
+              echo "DESCRIPTION=${{ github.event.client_payload.description }}" >> $GITHUB_ENV
+              echo "WORKFLOW_ID=${{ github.event.client_payload.workflow_id }}" >> $GITHUB_ENV
+            fi
+            echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
+
+        - name: Install dependencies
+          run: |
+            apt update && apt install -y unzip dpkg-dev git
+
+        - name: Checkout repo
+          uses: actions/checkout@v3
+
+        - name: Download release artifacts from workflow
+          uses: dawidd6/action-download-artifact@v3
+          with: 
+            name: ${{ env.PROJECT }}
+            path: artifacts
+            repo: SiaFoundation/${{ env.PROJECT }}
+            run_id: ${{ env.WORKFLOW_ID }}
+            workflow_conclusion: success
+
+
+        - name: Build .deb Package
+          shell: bash
+          run: |
+            TAG=${{ env.RELEASE_TAG }}
+            VERSION=${TAG:1}
+
+            for arch in amd64 arm64; do
+                BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
+
+                # Create the directory structure for the .deb package
+                mkdir -p ${BUILD_NAME}/DEBIAN
+                mkdir -p ${BUILD_NAME}/usr/bin
+                mkdir -p ${BUILD_NAME}/etc/systemd/system
+
+                # Copy the ${{ env.PROJECT }} binary
+                unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+                cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+
+                # Create the control file
+                echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
+                echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
+                echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
+
+                # Create systemd service file
+                echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+                echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+
+                # Create the prerem script
+                echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
+                echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+                echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+                chmod +x ${BUILD_NAME}/DEBIAN/prerm
+            
+                # Build the .deb file
+                echo "Building ${BUILD_NAME}.deb"
+                dpkg-deb --build ${BUILD_NAME}
+
+                # Move the .deb file
+                mkdir -p ./debian/pool/main/${{ env.PROJECT }}
+                mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
+
+                # Remove the temporary folders
+                rm -rf ${BUILD_NAME}
+
+                # Update the Packages file
+                mkdir -p debian/dists/stable/main/binary-${arch}
+                dpkg-scanpackages ./debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
+            done
+
+            # Delete artifacts folder
+            rm -rf ./artifacts
+
+        - name: Create Pull Request
+          uses: peter-evans/create-pull-request@v5
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
+            title: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
+            body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
+            branch: ${{ env.PROJECT }}/update
+            base: master
