@@ -120,6 +120,7 @@ jobs:
                 mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
 
                 # Sign the .deb file
+                rm -f ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig
                 gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
 
                 # Remove the temporary folders
@@ -128,8 +129,8 @@ jobs:
                 # Update the Packages file
                 mkdir -p debian/dists/stable/main/binary-${arch}
                 cd debian
-                dpkg-scanpackages ./pool/main/ | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
-                cd ..
+                dpkg-scanpackages . | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
+                cd ../
             done
 
             # Delete artifacts folder
@@ -147,6 +148,7 @@ jobs:
             apt-ftparchive release debian/dists/stable >> debian/dists/stable/Release
 
             # Sign the Release file
+            rm -f debian/dists/stable/Release.gpg
             gpg --armor --detach-sign --output debian/dists/stable/Release.gpg debian/dists/stable/Release
 
         - name: Create Pull Request
