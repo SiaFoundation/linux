@@ -133,6 +133,12 @@ jobs:
             # Delete artifacts folder
             rm -rf ./artifacts
 
+            # Create the Release file
+            apt-ftparchive release debian/dists/stable > debian/dists/stable/Release
+
+            # Sign the Release file
+            gpg --armor --detach-sign --output debian/dists/stable/Release.gpg debian/dists/stable/Release
+
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
           with:

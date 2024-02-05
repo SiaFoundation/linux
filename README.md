@@ -11,5 +11,6 @@ The following packages are supported
 Simply add this repo to your sources by running the following command
 
 ```bash
-echo "deb [trusted=yes] https://linux.sia.tech/debian stable main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
+sudo curl -fsSL https://linux.sia.tech/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/siafoundation.gpg
+echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/debian stable main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
 ```
