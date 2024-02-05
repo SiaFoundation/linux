@@ -44,7 +44,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip dpkg-dev git dpkg-sig
+            apt update && apt install -y unzip dpkg-dev git
 
         - name: Import GPG Key
           run: |
@@ -120,7 +120,7 @@ jobs:
                 mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
 
                 # Sign the .deb file
-                dpkg-sig --sign builder ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
+                gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
 
                 # Remove the temporary folders
                 rm -rf ${BUILD_NAME}
