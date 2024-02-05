@@ -48,7 +48,7 @@ jobs:
 
         - name: Import GPG Key
           run: |
-            echo "${{ secrets.GPG_SIGNING_KEY }}" | gpg --import
+            echo "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --import
 
         - name: Checkout repo
           uses: actions/checkout@v3
@@ -61,7 +61,6 @@ jobs:
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
-
 
         - name: Build .deb Package
           shell: bash
