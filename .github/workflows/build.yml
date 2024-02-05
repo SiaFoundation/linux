@@ -46,6 +46,10 @@ jobs:
           run: |
             apt update && apt install -y unzip dpkg-dev git
 
+        - name: Import GPG Key
+          run: |
+            echo "${{ secrets.GPG_SIGNING_KEY }}" | gpg --import
+
         - name: Checkout repo
           uses: actions/checkout@v3
 
@@ -115,6 +119,9 @@ jobs:
                 # Move the .deb file
                 mkdir -p ./debian/pool/main/${{ env.PROJECT }}
                 mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
+
+                # Sign the .deb file
+                dpkg-sig --sign builder ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
 
                 # Remove the temporary folders
                 rm -rf ${BUILD_NAME}
