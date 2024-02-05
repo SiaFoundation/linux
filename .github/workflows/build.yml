@@ -134,7 +134,15 @@ jobs:
             rm -rf ./artifacts
 
             # Create the Release file
-            apt-ftparchive release debian/dists/stable > debian/dists/stable/Release
+            echo "Origin: Sia Foundation" > debian/dists/stable/Release
+            echo "Label: Sia Foundation Debian Repository" >> debian/dists/stable/Release
+            echo "Suite: stable" >> debian/dists/stable/Release
+            echo "Codename: stable" >> debian/dists/stable/Release
+            echo "Version: 1.0" >> debian/dists/stable/Release
+            echo "Architectures: amd64 arm64" >> debian/dists/stable/Release
+            echo "Components: main" >> debian/dists/stable/Release
+            echo "Description: Sia Foundation Debian Repository" >> debian/dists/stable/Release
+            apt-ftparchive release debian/dists/stable >> debian/dists/stable/Release
 
             # Sign the Release file
             gpg --armor --detach-sign --output debian/dists/stable/Release.gpg debian/dists/stable/Release
