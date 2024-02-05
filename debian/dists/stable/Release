@@ -6,20 +6,20 @@ Version: 1.0
 Architectures: amd64 arm64
 Components: main
 Description: Sia Foundation Debian Repository
-Date: Mon, 05 Feb 2024 15:56:35 +0000
+Date: Mon, 05 Feb 2024 16:35:15 +0000
 MD5Sum:
- f6bb2aedb60c17fa6ba17818ac5582a1              235 Release
- 60aa90c07479197548b3ea510d4f2d8f              324 main/binary-amd64/Packages.gz
- 60aa90c07479197548b3ea510d4f2d8f              324 main/binary-arm64/Packages.gz
+ e376c6cb7b4b91b07f452918236d4c19              235 Release
+ 2b63700943af0eb05bed4ac58f4bf1cc              321 main/binary-amd64/Packages.gz
+ 2b63700943af0eb05bed4ac58f4bf1cc              321 main/binary-arm64/Packages.gz
 SHA1:
- 596f0dbb759f0b124930b826eb3cc378f32ebbce              235 Release
- 100239f8fe9e6ba4c0c335b129a955faedfb4c7a              324 main/binary-amd64/Packages.gz
- 100239f8fe9e6ba4c0c335b129a955faedfb4c7a              324 main/binary-arm64/Packages.gz
+ 6e50a16233c36d083b5afec47f3d1ecc464e09a6              235 Release
+ d2453def3e4914231c80684e9574386ed5f15a95              321 main/binary-amd64/Packages.gz
+ d2453def3e4914231c80684e9574386ed5f15a95              321 main/binary-arm64/Packages.gz
 SHA256:
- aa4f43c0ccd20c2838de252fdaf871e7c9770938194cd80e96f637605bc0bf9e              235 Release
- 2d0a5bc0d3cd614f4ed37dcebe69964ec4f795e755d920a32eb79f50e7340d08              324 main/binary-amd64/Packages.gz
- 2d0a5bc0d3cd614f4ed37dcebe69964ec4f795e755d920a32eb79f50e7340d08              324 main/binary-arm64/Packages.gz
+ 4018076625d3b2bf4dbf09b5da5bd9667c46dd6b5555e52c626288a5d6c72e56              235 Release
+ 0d7a2c79842f913f547ed98b392c22511a354e3d7ba8c4046dcdbf3cc68c7160              321 main/binary-amd64/Packages.gz
+ 0d7a2c79842f913f547ed98b392c22511a354e3d7ba8c4046dcdbf3cc68c7160              321 main/binary-arm64/Packages.gz
 SHA512:
- ae9951ac3afa1cbbe105a75770317b803670884141780c2cd4ff347697a11698e3fa5cc840e659b5e5ff34e311bb32a2c2aa8436087dc005b6e03f5f6cf0a833              235 Release
- 3a6322c9eb8ccacdd0c377252cb1a269bbe37e5b941ccee2bab858c2d3f9224f4c6f9da2469de436dba95829f0cf4ca72481f22189bd510f7c0d60ce68c08821              324 main/binary-amd64/Packages.gz
- 3a6322c9eb8ccacdd0c377252cb1a269bbe37e5b941ccee2bab858c2d3f9224f4c6f9da2469de436dba95829f0cf4ca72481f22189bd510f7c0d60ce68c08821              324 main/binary-arm64/Packages.gz
+ 57b4efdad9c65311dfbbbbda3a247aa044290d70aac34faa1ae1408d72d3cfb9e8d1fdef084b1cedf55132b0fb900eec453b28d4a4acc528a474bf149742cd84              235 Release
+ 671a0094d00000f8f8c61452f78dd2f6920ff437c9c65c3f4f401bc7d71820aadc7888004de400ac041e3a51ad64fbf929a01ee23b22d3de6c70db577d13bd2b              321 main/binary-amd64/Packages.gz
+ 671a0094d00000f8f8c61452f78dd2f6920ff437c9c65c3f4f401bc7d71820aadc7888004de400ac041e3a51ad64fbf929a01ee23b22d3de6c70db577d13bd2b              321 main/binary-arm64/Packages.gz
