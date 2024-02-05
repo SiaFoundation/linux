@@ -44,7 +44,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip dpkg-dev git
+            apt update && apt install -y unzip dpkg-dev git dpkg-sig
 
         - name: Import GPG Key
           run: |
