@@ -127,7 +127,9 @@ jobs:
 
                 # Update the Packages file
                 mkdir -p debian/dists/stable/main/binary-${arch}
-                dpkg-scanpackages ./debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
+                cd debian
+                dpkg-scanpackages ./pool/main/ | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
+                cd ..
             done
 
             # Delete artifacts folder
