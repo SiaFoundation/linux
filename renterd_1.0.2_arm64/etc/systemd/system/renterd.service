@@ -1,0 +1,13 @@
+[Unit]
+Description=Renterd: The Next-Gen Sia Renter
+
+After=network.target
+[Service]
+ExecStart=/usr/bin/renterd
+WorkingDirectory=/var/lib/renterd
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
+Alias=renterd.service

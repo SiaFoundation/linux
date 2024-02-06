@@ -1,25 +1,35 @@
-Origin: Sia Foundation
-Label: Sia Foundation Debian Repository
-Suite: stable
 Codename: stable
-Version: 1.0
+Date: Tue, 06 Feb 2024 11:56:15 UTC
 Architectures: amd64 arm64
 Components: main
-Description: Sia Foundation Debian Repository
-Date: Mon, 05 Feb 2024 16:57:23 +0000
+Description: Renterd: The Next-Gen Sia Renter
 MD5Sum:
- 584b1c344cd977f88048d1628f6eda3f              235 Release
- efc6bf593341051b6724bcf449c0b200              320 main/binary-amd64/Packages.gz
- efc6bf593341051b6724bcf449c0b200              320 main/binary-arm64/Packages.gz
+ e6d0302129a749139ee8515da9a52d97 459 main/binary-amd64/Packages
+ 778f47a005f819890d5511609ee9f2ec 339 main/binary-amd64/Packages.gz
+ c5969c53942fda584905e9a6c10d99b6 82 main/binary-amd64/Release
+ 951292b62208314e89dbbeb317a5ece1 459 main/binary-arm64/Packages
+ 41251d50d9fc13619d9977103167ca07 341 main/binary-arm64/Packages.gz
+ 829d92170eb430125a0cb4c9f67a1d69 82 main/binary-arm64/Release
+ d41d8cd98f00b204e9800998ecf8427e 0 main/source/Sources
+ 7029066c27ac6f5ef18d660d5741979a 20 main/source/Sources.gz
+ 9c860d2ed583a611d42066e7b13bf5b7 83 main/source/Release
 SHA1:
- 36059aad898506037bb17a70dd6e06b27dc2ca22              235 Release
- 05fded0bdaf3f6fda3c7ec7fbd649ceed0bdbf25              320 main/binary-amd64/Packages.gz
- 05fded0bdaf3f6fda3c7ec7fbd649ceed0bdbf25              320 main/binary-arm64/Packages.gz
+ 5627dbef0f65730986a51805bc473fc0487b75ac 459 main/binary-amd64/Packages
+ 6ce2faa1e7bb338e6d4a247a3c452777164e782e 339 main/binary-amd64/Packages.gz
+ 3dc9c8ee56e69de9939aa117e54ff25f43a36abd 82 main/binary-amd64/Release
+ ff840a9c026e596957812a3fd66cb2c98c3ffa5b 459 main/binary-arm64/Packages
+ ec8c7e283978dbe077a0a9c09b36d2da2e9b3ade 341 main/binary-arm64/Packages.gz
+ be97eeebb48bec22f4aa86537e37cfdce217c648 82 main/binary-arm64/Release
+ da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/source/Sources
+ 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/source/Sources.gz
+ 546327a642b760dc2acf42d4a54f51375d026f5a 83 main/source/Release
 SHA256:
- 4a8dfa112a8a4c11b6f51582ce840e954e46bda075c3e2491943ea307f7df35b              235 Release
- b897997838b724e36aaf7a69e8f3f0973533578fce39d88d712cb480294811fa              320 main/binary-amd64/Packages.gz
- b897997838b724e36aaf7a69e8f3f0973533578fce39d88d712cb480294811fa              320 main/binary-arm64/Packages.gz
-SHA512:
- 44048edf6d2f96d0bbb95ad5ab2bdbb7f75aeeeeaa69784c6fd7baa019bcfd394d8e098bac8ecf47522ff0cd751da27ad69c018013b69be45e5d3ede6cacfa6b              235 Release
- a17ed54702e2a27e7e5943ab8e221f1dba9e7c2b5a8d113ef7011be86d2cabdb7cf4a1177ec3045112a21156e5606717dba9f4db48f8e5033b7e88aac1f6922e              320 main/binary-amd64/Packages.gz
- a17ed54702e2a27e7e5943ab8e221f1dba9e7c2b5a8d113ef7011be86d2cabdb7cf4a1177ec3045112a21156e5606717dba9f4db48f8e5033b7e88aac1f6922e              320 main/binary-arm64/Packages.gz
+ 616b2bb3599bcb57244ce6b9ad1750d07f4974c4f16fb71d8e158b24bdf0167b 459 main/binary-amd64/Packages
+ 636d2cd0236293e65ba447db0d9a3ae480f6a9b6029d7a02497a0785e32153b2 339 main/binary-amd64/Packages.gz
+ ccae0719889ffe5e4773fe8eb75482df38badb9b44d5548333ebc896d07841b5 82 main/binary-amd64/Release
+ e8a3a82802d1803d06ec4e6d766ddb37e113f24a68c1c23c480d4d25d9396e24 459 main/binary-arm64/Packages
+ 8fd42b13e1d86adc4ae1f2b51f6902722d9272737f28927abc46ff9fa06d98e4 341 main/binary-arm64/Packages.gz
+ c4ef0309c9cd4b3a33fc91681d7c3949cbc1417f28d015bae45da54e2502f79b 82 main/binary-arm64/Release
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/source/Sources
+ 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/source/Sources.gz
+ 916859b50b069781cdb13170154078ee2967574b3108ae972ca8bc2dad217ee8 83 main/source/Release
