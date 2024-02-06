@@ -136,16 +136,20 @@ jobs:
             # Delete artifacts folder
             rm -rf ./artifacts
 
+            # Create a config file for apt-ftparchive
+            echo "APT::FTPArchive::Release::Origin \"Sia Foundation\";" > ./release.conf
+            echo "APT::FTPArchive::Release::Label \"Sia Foundation Debian Repository\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Suite \"stable\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Codename \"stable\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Version \"1.0\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Architectures \"amd64 arm64\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Components \"main\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::Description \"Sia Foundation Debian Repository\";" >> ./release.conf
+            echo "APT::FTPArchive::Release::BasePath \"debian\";" >> ./release.conf
+
             # Create the Release file
-            echo "Origin: Sia Foundation" > debian/dists/stable/Release
-            echo "Label: Sia Foundation Debian Repository" >> debian/dists/stable/Release
-            echo "Suite: stable" >> debian/dists/stable/Release
-            echo "Codename: stable" >> debian/dists/stable/Release
-            echo "Version: 1.0" >> debian/dists/stable/Release
-            echo "Architectures: amd64 arm64" >> debian/dists/stable/Release
-            echo "Components: main" >> debian/dists/stable/Release
-            echo "Description: Sia Foundation Debian Repository" >> debian/dists/stable/Release
-            apt-ftparchive -o APT::FTPArchive::Release::BasePath=debian release debian/dists/stable >> debian/dists/stable/Release
+            apt-ftparchive -c release.conf release debian/ > debian/dists/stable/Release
+            rm release.conf
 
             # Sign the Release file
             rm -f debian/dists/stable/Release.gpg
