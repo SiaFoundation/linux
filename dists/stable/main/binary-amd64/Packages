@@ -1,0 +1,14 @@
+Package: renterd
+Version: 1.0.2
+Architecture: amd64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/main/r/renterd/renterd_1.0.2_amd64.deb
+Size: 9042824
+SHA256: 571116731f94645c037bba3496650c70efe0ad4a584a1c1f13ac905c168de575
+SHA1: 939765be41de87078940c9470503ea1758fe03e1
+MD5sum: f4d72014900d6baf84395492fad7f49b
+Description: Renterd: The Next-Gen Sia Renter
+Homepage: https://github.com/SiaFoundation/renterd
+
