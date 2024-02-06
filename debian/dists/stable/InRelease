@@ -2,44 +2,44 @@
 Hash: SHA512
 
 Codename: stable
-Date: Tue, 06 Feb 2024 12:20:08 UTC
+Date: Tue, 06 Feb 2024 13:49:29 UTC
 Architectures: amd64 arm64
 Components: main
-Description: Renterd: The Next-Gen Sia Renter
+Description: The official home of Sia's Debian packages
 MD5Sum:
- 39040540909a8d3aeb3d55c3a692a945 459 main/binary-amd64/Packages
- 461e28e1f2fec688de31c19cd02ec7ab 341 main/binary-amd64/Packages.gz
+ 7864ec92cab5bbac4c3c6232274aed6a 459 main/binary-amd64/Packages
+ 1944ccb63741068eca3f7caec7a5243f 343 main/binary-amd64/Packages.gz
  c5969c53942fda584905e9a6c10d99b6 82 main/binary-amd64/Release
- 9ff761e59e6fd4aeed62dc61b8d9feb7 459 main/binary-arm64/Packages
- 711a40be9568cd91746fa9747cda30d3 340 main/binary-arm64/Packages.gz
+ fdf92a65a5f80db2c0139d78d6c2a823 459 main/binary-arm64/Packages
+ cd44e8310c99ba2915880ad86644a1f9 342 main/binary-arm64/Packages.gz
  829d92170eb430125a0cb4c9f67a1d69 82 main/binary-arm64/Release
 SHA1:
- d580c8a7fe1df404e4d08238bf9e187e3b917ebf 459 main/binary-amd64/Packages
- c5d9573005701c746376080fd7bacba5708f8963 341 main/binary-amd64/Packages.gz
+ d3bfdc9a23a1a48ebe837e07585e9e6d075a54eb 459 main/binary-amd64/Packages
+ aa21bca8875bad07fdaa60b8c9be8d381f75a8e9 343 main/binary-amd64/Packages.gz
  3dc9c8ee56e69de9939aa117e54ff25f43a36abd 82 main/binary-amd64/Release
- 88cba117332c336bdc9d7be1360eae93eb58a680 459 main/binary-arm64/Packages
- 9db2b24e045a9e1baf7eb7341f74b0f85a29e57a 340 main/binary-arm64/Packages.gz
+ a602cceb09e497f371d3ab174d5f136151aeb67f 459 main/binary-arm64/Packages
+ 07bd73c426b4670afb69250f9d81113bda91167f 342 main/binary-arm64/Packages.gz
  be97eeebb48bec22f4aa86537e37cfdce217c648 82 main/binary-arm64/Release
 SHA256:
- 3a94fd477ffb96fd87f79df6640badbb6b39036a198e634bc779f46a64e59722 459 main/binary-amd64/Packages
- b46399300432a1ac0ab46abd275dbb412472c4ff738f0cab36afb5dc96113ddc 341 main/binary-amd64/Packages.gz
+ 09ea86657c82bf19465988ebdd1c39d8ff5dc7f5150c503caf82fabca7f11e5e 459 main/binary-amd64/Packages
+ 3aa9d0631a923facee963d6561b9b63ded792c786fcd6719797bf656f0d5e387 343 main/binary-amd64/Packages.gz
  ccae0719889ffe5e4773fe8eb75482df38badb9b44d5548333ebc896d07841b5 82 main/binary-amd64/Release
- 794fa949bf376a6553a4fef0ee269e9cbdd6d8b7aba08f3c52e189f69d83ab6e 459 main/binary-arm64/Packages
- 87a8ec33a29fb2c7cbb59807bc8938b4fac4fa166631dad0ced380fbaf66436b 340 main/binary-arm64/Packages.gz
+ 2f2953d2b6cce676addb5cda779541de1e5a1608a52a434d37e0f406cb9d306f 459 main/binary-arm64/Packages
+ 44737a147c68fd703e8b05a13349b7b52760e2312c322a4d9604ae0f5438891f 342 main/binary-arm64/Packages.gz
  c4ef0309c9cd4b3a33fc91681d7c3949cbc1417f28d015bae45da54e2502f79b 82 main/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXCI/gACgkQkmYLCQNk
-yi9rYw/+N1ga1J6Rwpyw6EXRhYi+AAcq0yd43QVVfrADxRBuAbbfb3BMZ7I1WxSi
-M4grvEjfwp3TpXXitqN7QhDdwpv3HQtuj220yqm2rQpGDQbQfgZtxPPCbASa5Psn
-VAjsrSojpd1Fd36YTZDqJ6XWnL9pW6DcrQdYlmFwyOCwUcfbS1UbbL/StT/udiQ/
-0dS8Datl5bcc4M3H0V7kYnqThp7WKqVuJttMAsRQ+f9A4d3B3iwwxpf9Sg+DGPrk
-9WrBCsUjLX+JWhPi0evmm5bIhIrzuqI48Vxl8qrVpXtc9VoigsfEnS2rKeuE3oiY
-/3uQdXX1ku8A5o8L5KfQY9a0vrq06ZYkQdaBLFP/DgErSjONND7YLvxwFZeA+3uR
-34vVaKEcXf9VXyhmK08u5K9uSHeyk4+A9mFlpkoKcftg1/Ky81haP9L3RIdJh0MD
-V3JVZfdAMbj881lC2ck2Epz/3e1jOAWA2NAskHMOPeGfXMX8QIBTjer60LAwD7tQ
-5y5mXE7nZGPf3jpMIUpxNGkSS9NMsAxc+Vbwn8sgvHwZyRCV118VKvdymM4ofX6E
-4w0ZAbZL0AzMbtnWFLi0L4CCV3OfDd1U7NghlcXfRqUZGJJiu5mPkHl3alwE4W1w
-YzdTwYYBRtgNCcBWjfffosXv0yW6+FL86oBtr+fk9LQRRPtUidc=
-=odH+
+iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXCOOkACgkQkmYLCQNk
+yi/dUxAAlc0WsxcC4weswoPw6OEr7xYZwQ1ibzJNX3Ovan2j1EPMxY/qQIaEPMq5
+PNwoFk7ciKYGT6TH9kZQ5qJXosCoKuSo/YhSQ5/ZLpJazbQa0Bq2zkdsY7TdL15V
+R9cRY6m6VJUKXSzorEUTyBgTaPT7k1TBsZ1p9IShFwN9aJaPCSRLQjTjvo9wUZwb
+Dmzr4MPO2BbEBj3qUxe9346Vu1CSa1Tp8Ma4MPg7OlNf8aAuV9Xao83WLdZ/iZqc
+pJnExDsNsOhhy5KEUy3PZMEEaHRnaQuAvMKnaWVEKRKzDjC1lAbRlzMsFQz+6CME
+zRBmunVwTCIiDNTnUmIrFx0zHR4G8F7LqWHYzS/35knc9Os8p+nSCJXxqC/ELKqB
+K5Tge98+Vqijz3rwPuNwIC1Z1tyAcJl2R1MO88D7X0bzWoagEw2vtKgQJ9C8m+c0
+1WgZI/Oycxm2RN73aW1jjJurNv4B3Y57+30O+SMUgltEjB/E2pZxfliw8/JI91Cj
+yXGh6s1p8d52aVyfB/trRZ4/SDapMyKPsgcltApesgXXGSagRl+11WK8blFud/ee
+N0EQkYXRLJ1lKFPpz0zTfRwrei6Kz1eT2iiiibY3xc9ikZdezukn4rVRFRgHwgPG
+6lTkrsqAYFO6nG9qeldYgkJonur47ZXBvPHdJ3BUO65XYlYAQEg=
+=ElUW
 -----END PGP SIGNATURE-----
