@@ -62,16 +62,7 @@ jobs:
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
         
-        - name: Prepare repository with reprepro
-          run: |
-            mkdir -p conf
-            echo "Codename: stable" > conf/distributions
-            echo "Architectures: amd64 arm64 source" >> conf/distributions
-            echo "Components: main" >> conf/distributions
-            echo "Description: $DESCRIPTION" >> conf/distributions
-            echo "SignWith: yes" >> conf/distributions
-
-        - name: Build .deb Package and Add to Repository
+        - name: Build .deb packages
           shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
@@ -94,6 +85,7 @@ jobs:
               echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
               echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
               echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Section: net" >> ${BUILD_NAME}/DEBIAN/control
               echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
               echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
 
@@ -121,6 +113,7 @@ jobs:
               chmod +x ${BUILD_NAME}/DEBIAN/prerm
 
               # Build the .deb file
+              echo "Building ${BUILD_NAME}.deb"
               dpkg-deb --build ${BUILD_NAME}
 
               # Move the .deb file to a known directory
@@ -132,6 +125,8 @@ jobs:
               gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
             done
 
+        - name: Add packages to repository
+          run: |
             # Initialize repository directory for reprepro
             mkdir -p conf
             echo "Codename: stable" > conf/distributions
@@ -139,11 +134,10 @@ jobs:
             echo "Components: main" >> conf/distributions
             echo "Description: $DESCRIPTION" >> conf/distributions
             echo "SignWith: yes" >> conf/distributions
-
-            # Add packages to the repository with reprepro
             reprepro -Vb . includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
 
-            # Clean up artifacts and temporary configuration
+        - name: Clean up
+          run: |
             rm -rf ./artifacts
             rm -rf ./conf
 
