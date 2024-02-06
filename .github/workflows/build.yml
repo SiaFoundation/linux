@@ -44,7 +44,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip dpkg-dev git apt-utils
+            apt update && apt install -y unzip dpkg-dev git reprepro
 
         - name: Import GPG Key
           run: |
@@ -61,99 +61,91 @@ jobs:
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
+        
+        - name: Prepare repository with reprepro
+          run: |
+            mkdir -p conf
+            echo "Codename: stable" > conf/distributions
+            echo "Architectures: amd64 arm64 source" >> conf/distributions
+            echo "Components: main" >> conf/distributions
+            echo "Description: $DESCRIPTION" >> conf/distributions
+            echo "SignWith: yes" >> conf/distributions
 
-        - name: Build .deb Package
+        - name: Build .deb Package and Add to Repository
           shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
             for arch in amd64 arm64; do
-                BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
+              BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
 
-                # Create the directory structure for the .deb package
-                mkdir -p ${BUILD_NAME}/DEBIAN
-                mkdir -p ${BUILD_NAME}/usr/bin
-                mkdir -p ${BUILD_NAME}/etc/systemd/system
+              # Create the directory structure for the .deb package
+              mkdir -p ${BUILD_NAME}/DEBIAN
+              mkdir -p ${BUILD_NAME}/usr/bin
+              mkdir -p ${BUILD_NAME}/etc/systemd/system
 
-                # Copy the ${{ env.PROJECT }} binary
-                unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
-                cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+              # Copy the ${{ env.PROJECT }} binary
+              unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+              cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
 
-                # Create the control file
-                echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
-                echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
+              # Create the control file
+              echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
+              echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
 
-                # Create systemd service file
-                echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              # Create systemd service file
+              echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                # Create the prerem script
-                echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
-                echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-                echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-                chmod +x ${BUILD_NAME}/DEBIAN/prerm
-            
-                # Build the .deb file
-                echo "Building ${BUILD_NAME}.deb"
-                dpkg-deb --build ${BUILD_NAME}
+              # Create the prerem script
+              echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
+              echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+              echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+              chmod +x ${BUILD_NAME}/DEBIAN/prerm
 
-                # Move the .deb file
-                mkdir -p ./debian/pool/main/${{ env.PROJECT }}
-                mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
+              # Build the .deb file
+              dpkg-deb --build ${BUILD_NAME}
 
-                # Sign the .deb file
-                rm -f ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig
-                gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
+              # Move the .deb file to a known directory
+              mkdir -p ./debian/pool/main/${{ env.PROJECT }}
+              mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
 
-                # Remove the temporary folders
-                rm -rf ${BUILD_NAME}
-
-                # Update the Packages file
-                mkdir -p debian/dists/stable/main/binary-${arch}
-                cd debian
-                dpkg-scanpackages pool/main/ | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
-                cd ../
+              # Sign the .deb file (if necessary)
+              rm -f ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig
+              gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
             done
 
-            # Delete artifacts folder
+            # Initialize repository directory for reprepro
+            mkdir -p conf
+            echo "Codename: stable" > conf/distributions
+            echo "Architectures: amd64 arm64 source" >> conf/distributions
+            echo "Components: main" >> conf/distributions
+            echo "Description: $DESCRIPTION" >> conf/distributions
+            echo "SignWith: yes" >> conf/distributions
+
+            # Add packages to the repository with reprepro
+            reprepro -Vb . includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
+
+            # Clean up artifacts and temporary configuration
             rm -rf ./artifacts
-
-            # Create a config file for apt-ftparchive
-            echo "APT::FTPArchive::Release::Origin \"Sia Foundation\";" > ./release.conf
-            echo "APT::FTPArchive::Release::Label \"Sia Foundation Debian Repository\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Suite \"stable\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Codename \"stable\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Version \"1.0\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Architectures \"amd64 arm64\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Components \"main\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::Description \"Sia Foundation Debian Repository\";" >> ./release.conf
-            echo "APT::FTPArchive::Release::BasePath \"debian\";" >> ./release.conf
-
-            # Create the Release file
-            apt-ftparchive -c release.conf release debian/ > debian/dists/stable/Release
-            rm release.conf
-
-            # Sign the Release file
-            rm -f debian/dists/stable/Release.gpg
-            gpg --armor --detach-sign --output debian/dists/stable/Release.gpg debian/dists/stable/Release
+            rm -rf ./conf
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
