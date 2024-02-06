@@ -129,7 +129,7 @@ jobs:
                 # Update the Packages file
                 mkdir -p debian/dists/stable/main/binary-${arch}
                 cd debian
-                dpkg-scanpackages . | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
+                dpkg-scanpackages pool/main/ | gzip -c > dists/stable/main/binary-${arch}/Packages.gz
                 cd ../
             done
 
@@ -145,7 +145,7 @@ jobs:
             echo "Architectures: amd64 arm64" >> debian/dists/stable/Release
             echo "Components: main" >> debian/dists/stable/Release
             echo "Description: Sia Foundation Debian Repository" >> debian/dists/stable/Release
-            apt-ftparchive release debian/dists/stable >> debian/dists/stable/Release
+            apt-ftparchive -o APT::FTPArchive::Release::BasePath=debian release debian/dists/stable >> debian/dists/stable/Release
 
             # Sign the Release file
             rm -f debian/dists/stable/Release.gpg
