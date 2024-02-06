@@ -85,6 +85,7 @@ jobs:
               echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
               echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
               echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Priority: optional" >> ${BUILD_NAME}/DEBIAN/control
               echo "Section: net" >> ${BUILD_NAME}/DEBIAN/control
               echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
               echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
