@@ -117,13 +117,9 @@ jobs:
               echo "Building ${BUILD_NAME}.deb"
               dpkg-deb --build ${BUILD_NAME}
 
-              # Move the .deb file to a known directory
-              mkdir -p ./debian/pool/main/${{ env.PROJECT }}
-              mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
-
-              # Sign the .deb file (if necessary)
-              rm -f ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig
-              gpg --armor --detach-sign --output ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb.sig ./debian/pool/main/${{ env.PROJECT }}/${BUILD_NAME}.deb
+              # Sign the .deb file
+              rm -f ${BUILD_NAME}.deb.sig
+              gpg --armor --detach-sign --output ${BUILD_NAME}.deb.sig ${BUILD_NAME}.deb
             done
 
         - name: Add packages to repository
@@ -139,6 +135,8 @@ jobs:
 
         - name: Clean up
           run: |
+            rm *.deb
+            rm *.deb.sig
             rm -rf ./artifacts
             rm -rf ./debian/conf
 
