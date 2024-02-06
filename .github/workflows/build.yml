@@ -129,18 +129,18 @@ jobs:
         - name: Add packages to repository
           run: |
             # Initialize repository directory for reprepro
-            mkdir -p conf
-            echo "Codename: stable" > conf/distributions
-            echo "Architectures: amd64 arm64 source" >> conf/distributions
-            echo "Components: main" >> conf/distributions
-            echo "Description: $DESCRIPTION" >> conf/distributions
-            echo "SignWith: yes" >> conf/distributions
+            mkdir -p ./debian/conf
+            echo "Codename: stable" > ./debian/conf/distributions
+            echo "Architectures: amd64 arm64 source" >> ./debian/conf/distributions
+            echo "Components: main" >> ./debian/conf/distributions
+            echo "Description: $DESCRIPTION" >> ./debian/conf/distributions
+            echo "SignWith: yes" >> ./debian/conf/distributions
             reprepro -Vb ./debian includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
 
         - name: Clean up
           run: |
             rm -rf ./artifacts
-            rm -rf ./conf
+            rm -rf ./debian/conf
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v5
