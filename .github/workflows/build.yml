@@ -126,7 +126,7 @@ jobs:
             # Initialize repository directory for reprepro
             mkdir -p ./debian/conf
             echo "Codename: stable" > ./debian/conf/distributions
-            echo "Architectures: amd64 arm64 source" >> ./debian/conf/distributions
+            echo "Architectures: amd64 arm64" >> ./debian/conf/distributions
             echo "Components: main" >> ./debian/conf/distributions
             echo "Description: $DESCRIPTION" >> ./debian/conf/distributions
             echo "SignWith: yes" >> ./debian/conf/distributions
