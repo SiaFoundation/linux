@@ -135,7 +135,7 @@ jobs:
             echo "Components: main" >> conf/distributions
             echo "Description: $DESCRIPTION" >> conf/distributions
             echo "SignWith: yes" >> conf/distributions
-            reprepro -Vb . includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
+            reprepro -Vb ./debian includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
 
         - name: Clean up
           run: |
