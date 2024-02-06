@@ -1,0 +1,54 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Codename: stable
+Date: Tue, 06 Feb 2024 12:15:06 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Renterd: The Next-Gen Sia Renter
+MD5Sum:
+ 3d77d232754ff82eaac30ad1c047f7fa 459 main/binary-amd64/Packages
+ 82e433d1290f0a3218130521ea7f63e0 344 main/binary-amd64/Packages.gz
+ c5969c53942fda584905e9a6c10d99b6 82 main/binary-amd64/Release
+ 483b2bcbc1cca91dd72a2301b03ca68b 459 main/binary-arm64/Packages
+ 0a70dab3b838284a6deb92d633f063a1 343 main/binary-arm64/Packages.gz
+ 829d92170eb430125a0cb4c9f67a1d69 82 main/binary-arm64/Release
+ d41d8cd98f00b204e9800998ecf8427e 0 main/source/Sources
+ 7029066c27ac6f5ef18d660d5741979a 20 main/source/Sources.gz
+ 9c860d2ed583a611d42066e7b13bf5b7 83 main/source/Release
+SHA1:
+ 1621baf320075831f8c28d4d226d895055789658 459 main/binary-amd64/Packages
+ 6ee19c18d3ee12f454faa51887f041f4adeb140e 344 main/binary-amd64/Packages.gz
+ 3dc9c8ee56e69de9939aa117e54ff25f43a36abd 82 main/binary-amd64/Release
+ d58fc5cf6f18d90ea5f861ddbb01557911bb2882 459 main/binary-arm64/Packages
+ e82548c62d6f78a342e2b62f82366db977e54c31 343 main/binary-arm64/Packages.gz
+ be97eeebb48bec22f4aa86537e37cfdce217c648 82 main/binary-arm64/Release
+ da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/source/Sources
+ 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/source/Sources.gz
+ 546327a642b760dc2acf42d4a54f51375d026f5a 83 main/source/Release
+SHA256:
+ 508e138244bed5c59e7fb48234b677ecb47ebe007c446d0bea7060e3a1dced3d 459 main/binary-amd64/Packages
+ be56d75ee25923dae0af5d1d0e5c0e10694b77cdeb69f694f0d0f0768d91044b 344 main/binary-amd64/Packages.gz
+ ccae0719889ffe5e4773fe8eb75482df38badb9b44d5548333ebc896d07841b5 82 main/binary-amd64/Release
+ a3e139f060f166c21f268174c69b3a945539801f5df186f8cff579e25e4aa5ed 459 main/binary-arm64/Packages
+ 6e2bc216aee5a91ab652100673cf076f2ec903d2c1e1bc825ccd3bb66622a62d 343 main/binary-arm64/Packages.gz
+ c4ef0309c9cd4b3a33fc91681d7c3949cbc1417f28d015bae45da54e2502f79b 82 main/binary-arm64/Release
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/source/Sources
+ 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/source/Sources.gz
+ 916859b50b069781cdb13170154078ee2967574b3108ae972ca8bc2dad217ee8 83 main/source/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXCIsoACgkQkmYLCQNk
+yi/KtBAAxlJnuZj02+8WbEk+SDtlmNkX5K7pnJq+sFREEAE64fl7iPfWtUQ9e1IB
+bJfRTbbcWar8rxyo3yk80Dff+IVneHjSToyCilKvklKMHnnDNiT/X2/MhfiUfMSX
+S1+i5a4QX2Yaft6qeZoN9vvQ3oDQFI7X3tTWa6P3HhtWodMoDTPg8lTn7WXYh3bU
+Iqz+fQ4JbX9DicIMCWya5PRIUbVyXjhS4oHTq4OPBlMdY1WooB0j++PzRyrg4TIk
+zqzaRAUXZoAtaDZQx/5vcJRub+5Yo4SP+L6rPfd8FZ1FC08gOyS3HWWdj0dSmJl8
+7WJTraLGiZymv3oPQ7bV/VZK8Di3OldnkjKOgl15tB334gKF353SSr0WjaKZ5ltX
+p3eLjLu+U2Iga8crvVFaTJ7AEfhvvWPADSoA9sF5qWFMGR3Eq5CbA6a/kLmG86gK
+94ipOoplvvMgfJNxwXBBVeEH0wcZpqpW+8yWWZ3aK7Yr4fXFu6jfzC7PMvVmtxx7
+N4IGV3MoAz9O4p8lDueb6U6cIKROjoNassaBvXAW91FvgZUoQecUWy+EHa6Ep0m/
+NN4t4SFM54LXxnbzXeNMzkDypUaNG2O416h0SdZptX6JjIDLPqhC35wrYopgw1D3
+o84QNllCPr7A6Vz/Q2CRX4/RfIah9EtJz8qh8xzy8bpesykoo+k=
+=syRm
+-----END PGP SIGNATURE-----
