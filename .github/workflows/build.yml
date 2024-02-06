@@ -116,10 +116,6 @@ jobs:
               # Build the .deb file
               echo "Building ${BUILD_NAME}.deb"
               dpkg-deb --build ${BUILD_NAME}
-
-              # Sign the .deb file
-              rm -f ${BUILD_NAME}.deb.sig
-              gpg --armor --detach-sign --output ${BUILD_NAME}.deb.sig ${BUILD_NAME}.deb
             done
 
         - name: Add packages to repository
@@ -131,12 +127,11 @@ jobs:
             echo "Components: main" >> ./debian/conf/distributions
             echo "Description: $DESCRIPTION" >> ./debian/conf/distributions
             echo "SignWith: yes" >> ./debian/conf/distributions
-            reprepro -Vb ./debian includedeb stable ./debian/pool/main/${{ env.PROJECT }}/*.deb
+            reprepro -Vb ./debian includedeb stable *.deb
 
         - name: Clean up
           run: |
             rm *.deb
-            rm *.deb.sig
             rm -rf ./artifacts
             rm -rf ./debian/conf
 
