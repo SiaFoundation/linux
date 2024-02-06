@@ -116,6 +116,9 @@ jobs:
               # Build the .deb file
               echo "Building ${BUILD_NAME}.deb"
               dpkg-deb --build ${BUILD_NAME}
+
+              # Remove the folder
+              rm -rf ${BUILD_NAME}
             done
 
         - name: Add packages to repository
