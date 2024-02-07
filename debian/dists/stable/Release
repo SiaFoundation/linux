@@ -1,26 +1,26 @@
 Codename: stable
-Date: Tue, 06 Feb 2024 13:49:29 UTC
+Date: Wed, 07 Feb 2024 09:54:08 UTC
 Architectures: amd64 arm64
 Components: main
 Description: The official home of Sia's Debian packages
 MD5Sum:
- 7864ec92cab5bbac4c3c6232274aed6a 459 main/binary-amd64/Packages
- 1944ccb63741068eca3f7caec7a5243f 343 main/binary-amd64/Packages.gz
+ b6b9a355c0b7734ad341b978838faf4c 899 main/binary-amd64/Packages
+ a12718da02e46d566f770019178d739b 485 main/binary-amd64/Packages.gz
  c5969c53942fda584905e9a6c10d99b6 82 main/binary-amd64/Release
- fdf92a65a5f80db2c0139d78d6c2a823 459 main/binary-arm64/Packages
- cd44e8310c99ba2915880ad86644a1f9 342 main/binary-arm64/Packages.gz
+ d675cc241b5f32887ecdddb008a63424 899 main/binary-arm64/Packages
+ 0ec9a7f63e7ad1f5ebe20c9167f651cd 485 main/binary-arm64/Packages.gz
  829d92170eb430125a0cb4c9f67a1d69 82 main/binary-arm64/Release
 SHA1:
- d3bfdc9a23a1a48ebe837e07585e9e6d075a54eb 459 main/binary-amd64/Packages
- aa21bca8875bad07fdaa60b8c9be8d381f75a8e9 343 main/binary-amd64/Packages.gz
+ 4b640be6b2ab3609548ae7c02163a8f88b1ac639 899 main/binary-amd64/Packages
+ 834e42adf721d5a53e88c117114567c2879d08d0 485 main/binary-amd64/Packages.gz
  3dc9c8ee56e69de9939aa117e54ff25f43a36abd 82 main/binary-amd64/Release
- a602cceb09e497f371d3ab174d5f136151aeb67f 459 main/binary-arm64/Packages
- 07bd73c426b4670afb69250f9d81113bda91167f 342 main/binary-arm64/Packages.gz
+ 505ae2850f3347f96e927bc27ca30638a4c1d5bc 899 main/binary-arm64/Packages
+ f4f326af8c6dd8711ad096c09b51bcad43bc04b3 485 main/binary-arm64/Packages.gz
  be97eeebb48bec22f4aa86537e37cfdce217c648 82 main/binary-arm64/Release
 SHA256:
- 09ea86657c82bf19465988ebdd1c39d8ff5dc7f5150c503caf82fabca7f11e5e 459 main/binary-amd64/Packages
- 3aa9d0631a923facee963d6561b9b63ded792c786fcd6719797bf656f0d5e387 343 main/binary-amd64/Packages.gz
+ 97e896d809d6b36ca310d73459a9ab28a576d9051c55fab13af6024f17e3fdcf 899 main/binary-amd64/Packages
+ 4b9598f5c84bfb50fdb5515d08997cf3e09c607a0c1e748c44b29294b0c834ec 485 main/binary-amd64/Packages.gz
  ccae0719889ffe5e4773fe8eb75482df38badb9b44d5548333ebc896d07841b5 82 main/binary-amd64/Release
- 2f2953d2b6cce676addb5cda779541de1e5a1608a52a434d37e0f406cb9d306f 459 main/binary-arm64/Packages
- 44737a147c68fd703e8b05a13349b7b52760e2312c322a4d9604ae0f5438891f 342 main/binary-arm64/Packages.gz
+ 9d5c262a0fe34e41cfdd2be9bf82d043799863ccf4ba461278a58eecfb45a0f2 899 main/binary-arm64/Packages
+ 3524018e15cecf0e0264df153724900672d84b1fa39387b470b2bf77639cf529 485 main/binary-arm64/Packages.gz
  c4ef0309c9cd4b3a33fc91681d7c3949cbc1417f28d015bae45da54e2502f79b 82 main/binary-arm64/Release
