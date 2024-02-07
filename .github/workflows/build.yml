@@ -44,7 +44,11 @@ jobs:
 
         - name: Install dependencies
           run: |
-            apt update && apt install -y unzip dpkg-dev git
+            apt update && apt install -y unzip dpkg-dev git reprepro
+
+        - name: Import GPG Key
+          run: |
+            echo "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --import
 
         - name: Checkout repo
           uses: actions/checkout@v3
@@ -57,74 +61,73 @@ jobs:
             repo: SiaFoundation/${{ env.PROJECT }}
             run_id: ${{ env.WORKFLOW_ID }}
             workflow_conclusion: success
-
-
-        - name: Build .deb Package
+        
+        - name: Build .deb packages
           shell: bash
           run: |
             TAG=${{ env.RELEASE_TAG }}
             VERSION=${TAG:1}
 
             for arch in amd64 arm64; do
-                BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
+              BUILD_NAME=${{ env.PROJECT }}_${VERSION}_${arch}
 
-                # Create the directory structure for the .deb package
-                mkdir -p ${BUILD_NAME}/DEBIAN
-                mkdir -p ${BUILD_NAME}/usr/bin
-                mkdir -p ${BUILD_NAME}/etc/systemd/system
+              # Create the directory structure for the .deb package
+              mkdir -p ${BUILD_NAME}/DEBIAN
+              mkdir -p ${BUILD_NAME}/usr/bin
+              mkdir -p ${BUILD_NAME}/etc/systemd/system
 
-                # Copy the ${{ env.PROJECT }} binary
-                unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
-                cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+              # Copy the ${{ env.PROJECT }} binary
+              unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+              cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
 
-                # Create the control file
-                echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
-                echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
-                echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
+              # Create the control file
+              echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
+              echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Priority: optional" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Section: net" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
+              echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
 
-                # Create systemd service file
-                echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              # Create systemd service file
+              echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-                echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+              echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
-                # Create the prerem script
-                echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
-                echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-                echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-                chmod +x ${BUILD_NAME}/DEBIAN/prerm
-            
-                # Build the .deb file
-                echo "Building ${BUILD_NAME}.deb"
-                dpkg-deb --build ${BUILD_NAME}
+              # Create the prerem script
+              echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
+              echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+              echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
+              chmod +x ${BUILD_NAME}/DEBIAN/prerm
 
-                # Move the .deb file
-                mkdir -p ./debian/pool/main/${{ env.PROJECT }}
-                mv ${BUILD_NAME}.deb ./debian/pool/main/${{ env.PROJECT }}/
+              # Build the .deb file
+              echo "Building ${BUILD_NAME}.deb"
+              dpkg-deb --build ${BUILD_NAME}
 
-                # Remove the temporary folders
-                rm -rf ${BUILD_NAME}
-
-                # Update the Packages file
-                mkdir -p debian/dists/stable/main/binary-${arch}
-                dpkg-scanpackages ./debian/pool/main/ | gzip -c > debian/dists/stable/main/binary-${arch}/Packages.gz
+              # Remove the folder
+              rm -rf ${BUILD_NAME}
             done
 
-            # Delete artifacts folder
+        - name: Add packages to repository
+          run: |
+            reprepro -Vb ./debian includedeb stable *.deb
+
+        - name: Clean up
+          run: |
+            rm *.deb
             rm -rf ./artifacts
 
         - name: Create Pull Request
