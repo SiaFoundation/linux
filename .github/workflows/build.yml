@@ -1,4 +1,4 @@
-name: Build Debian Package
+name: Build .deb Packages
 
 on:
   repository_dispatch:
@@ -161,7 +161,6 @@ jobs:
       - name: Add packages to repository
         shell: bash
         run: |
-          find .
           # loop over all supported debian releases
           for release in 'bookworm' 'bullseye' 'buster'; do
             for deb in ./debian_*.deb; do
