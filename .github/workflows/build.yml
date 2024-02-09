@@ -73,7 +73,7 @@ jobs:
           VERSION=${TAG:1}
 
           for arch in amd64 arm64; do
-            BUILD_NAME=${{ matrix.distro }}_${{ matrix.release }}_${{ env.PROJECT }}_${VERSION}_${arch}
+            BUILD_NAME=${{ matrix.distro }}_${{ env.PROJECT }}_${VERSION}_${arch}
 
             # Create the directory structure for the .deb package
             mkdir -p ${BUILD_NAME}/DEBIAN
@@ -132,6 +132,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Store input in env
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+            echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
+          elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
+            echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
+          fi
+
       - name: install dependencies
         run: |
           sudo apt-get update && sudo apt-get -y install reprepro
@@ -141,6 +151,8 @@ jobs:
 
       - name: Download deb packages
         uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
 
       - name: Import GPG Key
         run: |
@@ -149,21 +161,22 @@ jobs:
       - name: Add packages to repository
         shell: bash
         run: |
+          find .
           # loop over all supported debian releases
           for release in 'bookworm' 'bullseye' 'buster'; do
-            for deb in ./debian_${release}_*.deb; do
+            for deb in ./debian_*.deb; do
               reprepro -Vb ./debian includedeb ${release} $deb
-              rm $deb
             done
           done
 
           # loop over all supported ubuntu releases
           for release in 'focal' 'jammy' 'mantic' 'noble'; do
-            for deb in ./ubuntu_${release}_*.deb; do
+            for deb in ./ubuntu_*.deb; do
               reprepro -Vb ./ubuntu includedeb ${release} $deb
-              rm $deb
             done
           done
+
+          rm -rf *.deb
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
