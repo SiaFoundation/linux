@@ -8,11 +8,25 @@ The following packages are supported
 - [renterd](https://github.com/SiaFoundation/renterd)
 - [hostd](https://github.com/SiaFoundation/hostd)
 
-Simply add this repo to your sources by running the following command
+## Usage
+
+Simply add this repo to your sources by running the following command, replacing
+`<distro>` and `<release>`> with one of the following available distros and
+their corresponding release.
+
+- `debian`
+    - `bookworm`
+    - `bullseye`
+    - `buster`
+- `ubuntu`
+    - `focal`
+    - `jammy`
+    - `mantic`
+    - `noble`
 
 ```bash
-sudo curl -fsSL https://linux.sia.tech/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/siafoundation.gpg
-echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/debian stable main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
+sudo curl -fsSL https://linux.sia.tech/<distro>/gpg | sudo gpg --dearmor -o /usr/share/keyrings/siafoundation.gpg
+echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/<distro> <release> main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
 ```
 
 After that, you can install any of the available packages (e.g. `hostd`) like this:
