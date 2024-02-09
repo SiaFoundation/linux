@@ -27,27 +27,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # Use oldest supported versions of each distro
         include:
-          # Debian
-          - distro: 'debian'
-            release: 'stable'
-          - distro: 'debian'
-            release: 'bookworm'
-          - distro: 'debian'
-            release: 'bullseye'
+          # Debian 10
           - distro: 'debian'
             release: 'buster'
-          # Ubuntu
-          - distro: 'ubuntu'
-            release: 'latest'
+          # Ubuntu 20.04
           - distro: 'ubuntu'
             release: 'focal'
-          - distro: 'ubuntu'
-            release: 'jammy'
-          - distro: 'ubuntu'
-            release: 'mantic'
-          - distro: 'ubuntu'
-            release: 'noble'
     container:
       image: ${{ matrix.distro }}:${{ matrix.release }}
     steps:
@@ -86,7 +73,7 @@ jobs:
           VERSION=${TAG:1}
 
           for arch in amd64 arm64; do
-            BUILD_NAME=${{ matrix.distro }}+${{ matrix.release }}+${{ env.PROJECT }}_${VERSION}_${arch}
+            BUILD_NAME=${{ matrix.distro }}_${{ matrix.release }}_${{ env.PROJECT }}_${VERSION}_${arch}
 
             # Create the directory structure for the .deb package
             mkdir -p ${BUILD_NAME}/DEBIAN
@@ -138,7 +125,7 @@ jobs:
       - name: upload deb packages
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.distro }}-${{ matrix.release}}
+          name: ${{ matrix.distro }}
           path: '*.deb'
 
   create-pull-request:
@@ -154,8 +141,6 @@ jobs:
 
       - name: Download deb packages
         uses: actions/download-artifact@v4
-        with:
-          merge-multiple: true
 
       - name: Import GPG Key
         run: |
@@ -164,21 +149,20 @@ jobs:
       - name: Add packages to repository
         shell: bash
         run: |
-          for package in *.deb; do
-            # get the distro and release from the filename
-            IFS='+' read -r -a parts <<< ${package}
-            distro=${parts[0]}
-            release=${parts[1]}
-            filename=${parts[2]}
+          # loop over all supported debian releases
+          for release in 'bookworm' 'bullseye' 'buster'; do
+            for deb in ./debian_${release}_*.deb; do
+              reprepro -Vb ./debian includedeb ${release} $deb
+              rm $deb
+            done
+          done
 
-            # trim the distro and release from the filename
-            mv ${package} ${filename}
-
-            # add package
-            reprepro -Vb ./${distro} includedeb ${release} ${filename}
-
-            # remove the file
-            rm ${filename}
+          # loop over all supported ubuntu releases
+          for release in 'focal' 'jammy' 'mantic' 'noble'; do
+            for deb in ./ubuntu_${release}_*.deb; do
+              reprepro -Vb ./ubuntu includedeb ${release} $deb
+              rm $deb
+            done
           done
 
       - name: Create Pull Request
