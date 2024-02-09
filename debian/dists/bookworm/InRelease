@@ -2,44 +2,44 @@
 Hash: SHA512
 
 Codename: bookworm
-Date: Fri, 09 Feb 2024 12:39:42 UTC
+Date: Fri, 09 Feb 2024 12:44:30 UTC
 Architectures: amd64 arm64
 Components: main
 Description: The official home of Sia's Debian packages
 MD5Sum:
- 3f40f6b6001c6dbc9a5edc53812d13aa 459 main/binary-amd64/Packages
- 6c0b8f438421d245568712fab7c1b050 345 main/binary-amd64/Packages.gz
+ 65b26b836811dbe4fdc1179b66eeba74 440 main/binary-amd64/Packages
+ 9934c33b736aa5a7d718022b9a0ed7c5 332 main/binary-amd64/Packages.gz
  dc9f6e819803d0e9e5a527d595a5addd 92 main/binary-amd64/Release
- 820627b2d8623033953d09daea2ccfef 459 main/binary-arm64/Packages
- b72def01e8a28d64a4f5e16216608548 341 main/binary-arm64/Packages.gz
+ a19db9a68811a037c79f47bf8eec427b 440 main/binary-arm64/Packages
+ 67aaa5c104d7267d6e94a6ff75afdf62 333 main/binary-arm64/Packages.gz
  17c7c8fa05749cf8fbb4b75fa3723ee1 92 main/binary-arm64/Release
 SHA1:
- 505945798d58956103ca2befdf67d1990a784b63 459 main/binary-amd64/Packages
- 934899892c53675474afb54827430f5bac0de5b2 345 main/binary-amd64/Packages.gz
+ 864b96cce94ba2739dfe3c559ae527cc7b362bab 440 main/binary-amd64/Packages
+ aa94679df2a16ac75de2997e8cdbecc44c8c51b0 332 main/binary-amd64/Packages.gz
  2e2aa1b27ce443166745e1f210ac5ea933e37f9c 92 main/binary-amd64/Release
- 53dda54037b0db6c041e0a00069f9c844aea3971 459 main/binary-arm64/Packages
- 13bbc31bd0c49ba1ac73ff0163ca9e1ab5e11e26 341 main/binary-arm64/Packages.gz
+ 5a6f44c11c3169a9ac121aa17bbc89c5b8e5f3aa 440 main/binary-arm64/Packages
+ 7e4b652ac6f0fdbe623e65217bb9f8b64f4f1520 333 main/binary-arm64/Packages.gz
  4163a8dca3077328d63b87376fa4b38eccea034a 92 main/binary-arm64/Release
 SHA256:
- 0483ae0a0cb5c1875ed4afe7ee8fe060dbea2648ce042745667fa8eb69347e35 459 main/binary-amd64/Packages
- 9ec1dbac5cd8e4f27707ac80a9593097eccdbabc573acf2bc405385ef5d85803 345 main/binary-amd64/Packages.gz
+ 863265759af2d8ae8e405e01747b51355b4642a7ad4070efdfc65845da12ef23 440 main/binary-amd64/Packages
+ 8f5acc4f04bf0afd5844b75327bf9458e48b937b6802a8c14ec9b28fe014873a 332 main/binary-amd64/Packages.gz
  e0392ae460b89f37ada1ea4841878ebe712559090ad428ea8ec8d6c7c3365b89 92 main/binary-amd64/Release
- 6dfcd69631deb95ab79d2670844219ac0777f593593ea7c087ea57ceeb921c39 459 main/binary-arm64/Packages
- 7e6762c8c7f02f5183402f90fe47a32b06ec2a6463736f6eda7e1d7de7a3c412 341 main/binary-arm64/Packages.gz
+ dfba40ae31b57e306ab6dd377c6b4b54e44ba8e128c6a6d6a5e60ce746126871 440 main/binary-arm64/Packages
+ c0e91cbae27b72d7f68bf1091d2b677fbba5c9c52b5f59b21c61c64d73cb40d1 333 main/binary-arm64/Packages.gz
  3efb4b5e3d65c8930252b206a22375f57cec62ab7ef3f8e9542fe47ee9a6e482 92 main/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXGHQ4ACgkQkmYLCQNk
-yi+TYBAAwIznYZnPx108ucAW4fzejXiCm2xwIe5JvseW7zyhSKhr3JCztN61b3fn
-dOp0EJbDCbIvY5FlczC1XCpBYDyhKasyYVkR6UY6TTTvoFR6084ehmyDc8Pt/5iL
-E8NvR8qfVcNBf9gaiQR4/29kKY86UJdngaiY0yADMQKYzgcv5N50uoAqGCWsKsba
-jYVn7CpZIkrg24IPLDcAGGwlEbzTd1eaHZ1WT79grXSKEVCWji6ghLDQIsPkO5e+
-x3XSvYJTsKRYuqdlWTjcSA/258fkMFbygi4NCfyjJexHHuy/HbJWDf//8nvYYIjR
-AiUwpRA3eZ+qKhq5APXra8T/FOKFDIMdlx3BF3F58m1VABw20/cVbLPj6Mgx7gHe
-O3z17CvIYi1ksAywXRjn056iiDLZJl9av0HFbyXAgemtTKC3+mmnR/cHdV/y9yM1
-Ysx/sK6/g6iEjgo+4oA/KqelV9+sftKFrd8xG08VDeS3spJBffeuFhipouOGEa5Y
-5wRfkDmytjMobWUQJIw9KwXTFQwqK4pPO/MAbuS3qmtUofdUHfNacy5whFGLARTI
-XbKJ2u/Yx94f7d1JyCWcfJ59YJwR3aV5iqtsGEkMj0fWC0qCT7bB8p2+dZJwudSU
-g34rVPHdtVFmw0TDcInfhSoY3W1syLUl0EFbgdJ68MXK44wdFPU=
-=UPzH
+iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXGHi4ACgkQkmYLCQNk
+yi9s6Q/9E573fa+QOvah45v2HNgeFFNopM1Kr0sBbCB5lC1SH6vJZ3sRXdNAYpxU
+K9GvpySxZ/q03oiK+7CpfHZ1/Vth7MflQSOsZXM78bJzmbrh53F8iODEvvAy58d9
+FO4apdolrFecH33Qr77RmkAZ2MHogSt+wT6Q6A8XWsuyNBEQc30XUIGMk7BCA/Ls
+E7Lo+ZCEs9CQEiI7A6fwt7VCvQ+1lLw0WHoQ4mwm3NpygkgYZwkBpEim+z5+Pc2I
+ZfiEDrPwEOfZDMkOod0YPiKFwxiwpqMfwcb5kMINhe+HHNiTIkeIgxEiefOt8XHd
+U3Vtc8eWeCNnCV2JfSX5+pbe3db7TCrVk+o9jrnkQuWpWvRQiep21tKuCb/U8kkZ
+K7A4MsAfMtHdobt8/2abXBIiNgXTPqM39jP3q3Xg58/Bj/pMlzBCXMlPGRpyUwc2
+8B57tBPghtqYKRz9LzZy5sqd2nQl1Ge+Eu/ljpSwpkZ4cIQznUtHGsIMcK2O/kZb
+YJKSw8AEiL9vsTi5juF1myWU596ons5vP8LP/rm+fokDHjBzb3Hk/y2NpdC7suSm
+WWaO4LGuBjxW3xgS9n5uh62vhGm8SNigeKLXwL2NLxnbz3Z7gku4JEOP3aTQmgSs
+1/x5J7hWOIEywuFqPx3NXpEFyfn3JbvxILlBMAK8ESmji9vMFiY=
+=om3t
 -----END PGP SIGNATURE-----
