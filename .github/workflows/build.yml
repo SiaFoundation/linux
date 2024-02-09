@@ -25,7 +25,14 @@ on:
 jobs:
   build:
       runs-on: ubuntu-latest
-      container: debian:stable
+      strategy:
+        matrix:
+          distro: [
+            'debian:bookworm', 'debian:bullseye', 'debian:buster', 'debian:stable',
+            'ubuntu:focal', 'ubuntu:jammy', 'ubuntu:mantic', 'ubuntu:noble', 'ubuntu:latest'
+          ]
+      container:
+        image: ${{ matrix.distro }}
       steps:
         - name: Store input in env
           run: |
@@ -122,8 +129,10 @@ jobs:
             done
 
         - name: Add packages to repository
+          shell: bash
           run: |
-            reprepro -Vb ./debian includedeb stable *.deb
+            IFS=':' read -r -a parts <<< "${{ matrix.distro }}"
+            reprepro -Vb ./${parts[0]} includedeb ${parts[1]} *.deb
 
         - name: Clean up
           run: |

@@ -1,0 +1,29 @@
+Codename: latest
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Ubuntu packages
+SignWith: yes
+
+Codename: focal
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Ubuntu packages
+SignWith: yes
+
+Codename: jammy
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Ubuntu packages
+SignWith: yes
+
+Codename: mantic
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Ubuntu packages
+SignWith: yes
+
+Codename: noble
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Ubuntu packages
+SignWith: yes
