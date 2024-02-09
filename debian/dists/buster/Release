@@ -1,0 +1,26 @@
+Codename: buster
+Date: Fri, 09 Feb 2024 12:39:42 UTC
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Debian packages
+MD5Sum:
+ 3f40f6b6001c6dbc9a5edc53812d13aa 459 main/binary-amd64/Packages
+ 6c0b8f438421d245568712fab7c1b050 345 main/binary-amd64/Packages.gz
+ dc9f6e819803d0e9e5a527d595a5addd 92 main/binary-amd64/Release
+ 820627b2d8623033953d09daea2ccfef 459 main/binary-arm64/Packages
+ b72def01e8a28d64a4f5e16216608548 341 main/binary-arm64/Packages.gz
+ 17c7c8fa05749cf8fbb4b75fa3723ee1 92 main/binary-arm64/Release
+SHA1:
+ 505945798d58956103ca2befdf67d1990a784b63 459 main/binary-amd64/Packages
+ 934899892c53675474afb54827430f5bac0de5b2 345 main/binary-amd64/Packages.gz
+ 2e2aa1b27ce443166745e1f210ac5ea933e37f9c 92 main/binary-amd64/Release
+ 53dda54037b0db6c041e0a00069f9c844aea3971 459 main/binary-arm64/Packages
+ 13bbc31bd0c49ba1ac73ff0163ca9e1ab5e11e26 341 main/binary-arm64/Packages.gz
+ 4163a8dca3077328d63b87376fa4b38eccea034a 92 main/binary-arm64/Release
+SHA256:
+ 0483ae0a0cb5c1875ed4afe7ee8fe060dbea2648ce042745667fa8eb69347e35 459 main/binary-amd64/Packages
+ 9ec1dbac5cd8e4f27707ac80a9593097eccdbabc573acf2bc405385ef5d85803 345 main/binary-amd64/Packages.gz
+ e0392ae460b89f37ada1ea4841878ebe712559090ad428ea8ec8d6c7c3365b89 92 main/binary-amd64/Release
+ 6dfcd69631deb95ab79d2670844219ac0777f593593ea7c087ea57ceeb921c39 459 main/binary-arm64/Packages
+ 7e6762c8c7f02f5183402f90fe47a32b06ec2a6463736f6eda7e1d7de7a3c412 341 main/binary-arm64/Packages.gz
+ 3efb4b5e3d65c8930252b206a22375f57cec62ab7ef3f8e9542fe47ee9a6e482 92 main/binary-arm64/Release
