@@ -3,3 +3,21 @@ Architectures: amd64 arm64
 Components: main
 Description: The official home of Sia's Debian packages
 SignWith: yes
+
+Codename: bookworm
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Debian packages
+SignWith: yes
+
+Codename: bullseye
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Debian packages
+SignWith: yes
+
+Codename: buster
+Architectures: amd64 arm64
+Components: main
+Description: The official home of Sia's Debian packages
+SignWith: yes
