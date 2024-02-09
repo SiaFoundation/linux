@@ -78,6 +78,7 @@ jobs:
             # Create the directory structure for the .deb package
             mkdir -p ${BUILD_NAME}/DEBIAN
             mkdir -p ${BUILD_NAME}/usr/bin
+            mkdir -p ${BUILD_NAME}/var/lib/${{ env.PROJECT }}
             mkdir -p ${BUILD_NAME}/etc/systemd/system
 
             # Copy the ${{ env.PROJECT }} binary
