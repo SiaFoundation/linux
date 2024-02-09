@@ -68,11 +68,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt update && apt install -y unzip dpkg-dev git reprepro
-
-      - name: Import GPG Key
-        run: |
-          echo "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --import
+          apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC  apt-get -y install unzip dpkg-dev git
 
       - name: Download release artifacts from workflow
         uses: dawidd6/action-download-artifact@v3
@@ -149,19 +145,27 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get -y install reprepro
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Download deb packages
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
 
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Import GPG Key
+        run: |
+          echo "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --import
 
       - name: Add packages to repository
         shell: bash
         run: |
           for package in *.deb; do
-            # split up the filename to get the distro and release
+            # get the distro and release from the filename
             IFS='+' read -r -a parts <<< ${package}
             distro=${parts[0]}
             release=${parts[1]}
