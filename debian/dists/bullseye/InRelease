@@ -2,44 +2,44 @@
 Hash: SHA512
 
 Codename: bullseye
-Date: Fri, 09 Feb 2024 13:38:54 UTC
+Date: Mon, 12 Feb 2024 11:04:15 UTC
 Architectures: amd64 arm64
 Components: main
 Description: The official home of Sia's Debian packages
 MD5Sum:
- ac90e1409845ded53b85df57048da559 899 main/binary-amd64/Packages
- 4bc6899044582db12a613c51c806fe6e 486 main/binary-amd64/Packages.gz
+ 7f4024e62d24dbe66b0cb04a96198016 899 main/binary-amd64/Packages
+ 57cc655f382ee2892343eb3a6a21f727 485 main/binary-amd64/Packages.gz
  dc9f6e819803d0e9e5a527d595a5addd 92 main/binary-amd64/Release
- 2ba0af51b12928352d5b2b29789f55b9 899 main/binary-arm64/Packages
- 335ae84c9cad7d22a952ad73ee427d41 483 main/binary-arm64/Packages.gz
+ 278be47f49252dd383a815c22a9b879e 899 main/binary-arm64/Packages
+ 707cd74ab8e31692925721bfc1184557 485 main/binary-arm64/Packages.gz
  17c7c8fa05749cf8fbb4b75fa3723ee1 92 main/binary-arm64/Release
 SHA1:
- b6b87206264038e95464d644d7c98fc8c4622845 899 main/binary-amd64/Packages
- e2c3d219a5d5c902670b9f5f2b7dd416659390ce 486 main/binary-amd64/Packages.gz
+ e844f47d0079073383e6eb94b550cee1cbdd8081 899 main/binary-amd64/Packages
+ 48097fe81fcdea9b9e7ca445e1293198000b5b29 485 main/binary-amd64/Packages.gz
  2e2aa1b27ce443166745e1f210ac5ea933e37f9c 92 main/binary-amd64/Release
- 57a0a30ebccbc8abfa4382fb8407307b61416c87 899 main/binary-arm64/Packages
- a89c4cad7d51be300ef00d323f18ff5fa49ea289 483 main/binary-arm64/Packages.gz
+ 5bdbfb1f1ba54510ec2c9cbf3e65a159b8468cb6 899 main/binary-arm64/Packages
+ b9a77b46e20650dcfd6d74d73d24cbe0a3e62484 485 main/binary-arm64/Packages.gz
  4163a8dca3077328d63b87376fa4b38eccea034a 92 main/binary-arm64/Release
 SHA256:
- ce6a6d633b069cc31428ccb8f2dc2be82403656d22f383f4d38188d876569844 899 main/binary-amd64/Packages
- d36b8a0411741185fb9acbccb2cb2692680c3a49ea54d6e95b8dd3b77dd6a2e8 486 main/binary-amd64/Packages.gz
+ b5c7a9633c3ebb873123c1a17d85e5fce36cbaecffad7ea31542cca2b6cb305a 899 main/binary-amd64/Packages
+ e0725071fa2ff9651c9b898ace987340513e78be3ebf085da66a48f35c68a8bb 485 main/binary-amd64/Packages.gz
  e0392ae460b89f37ada1ea4841878ebe712559090ad428ea8ec8d6c7c3365b89 92 main/binary-amd64/Release
- 137241823fe0ecf5af40f96edd1a5f1c90573121f9d7b211a09cec55295cbd99 899 main/binary-arm64/Packages
- 831f80a28ae55e39248e5b78ddb58fb49ee0cd5b6bfe868e4da2be3b5c365173 483 main/binary-arm64/Packages.gz
+ e969c3c9966177269a1badda05724a32fe915f7398dbfb0f97aebad3662b8b19 899 main/binary-arm64/Packages
+ 79c5dbaa9a142326cb3448fbea57bb626a77182cb5b6aebf9e3d030daaf6454c 485 main/binary-arm64/Packages.gz
  3efb4b5e3d65c8930252b206a22375f57cec62ab7ef3f8e9542fe47ee9a6e482 92 main/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXGKu4ACgkQkmYLCQNk
-yi9GyhAAjnYIMAiyBj2NV0/wjrIYCcy7tGbE6KZ/h20otOuoe1lCIFxcv01pTEeq
-xEBil/UJH/gX17aQzo0u+fcodaeWvSlmK+LcDySwTMmH/ioOytnLG0heFa+mew32
-0DCLaht7MVK9gyFxyCESxUsOzyy4aQunRCSrNL9dZMbNx7cHsxqQsfn7ljuep2RO
-8/uYnRW22f77QkUob837w5NC1BQTXKtZzXrWjDaDUujPAFgndLQoTPh+4wUD+N7A
-IJSgtTxj7+OFt/JbwFC5C37AEM+CITrrDJYTHkacCpJ0ofHbSWtAx4a1xSjyLGyF
-r7gHC+oTDij0oky0sIiK7r7BMmbEl6V2Axlx1jcaNR/y4vONh9aU90Gg0ISytHBl
-ihojtk47AuyicEQKRh0o3KXdOuQUpyomekBrVBB/qYwxYbCxPO8kYVoop7guWMAn
-wGjXYP4UQqzagslBqC47P95CPj2rmwT2ng0JWR+vRXmnFYixm27/+ollZ3DDLL4d
-kH+6iWTTwaIl7YXkGEbx672zRAcJZmiRlZxtHgjmyDxiVCLD8kgnFiUBNoTHbBrk
-7+4vgSRZITkT9DgnsJnPkwrdiUY7rvab6Z0IEsG8qL8tPEas3+TIHpgRuI4PHuwg
-vF95prsgLXprD8mYWMWZemgxIg3qcr1AIuKj8QA6VHvjVtBeOjA=
-=eOat
+iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmXJ+y8ACgkQkmYLCQNk
+yi+PQBAA3ulO/cr6RTyjEMjxccznxph2m0Gxm84nLUgfTTyDjmz/+b6Mjdg0WmdO
+v0vYKC/In41uoH1blRKtqd0xr1DI/y3JThEaCmloFnh12Ix1QmpkH7e9yWVgwN33
+TuJYrgsOTSSu/ZcMwivHgzkgt1iZjBlzQTPrUUzAqoMgb08dxn7I3sZOyLmzKUT0
+K23oMGz+fCHiRhQmqiN3qt5HKgGuxJBV8MCnOYMT1dLMZZdA1cDKu1jU5s7XzRzw
+Z1b1Q/FfcvYXrP3hGS3ewFLcWsxVnN+Pk5vm4EI3FVAkI6OljILhoEiDJVlZv7GM
+a7Zzz0mqunFe3uH/VidcFINQNRXIJcMjw5WqkKdLDu83/MvkTp1G9xveJ3cCTwZw
++hXZ0+nYvaih2OEoN/ztYOQV+nFngn/sf/wmVXKgKsOkGgv7PYHy7PVbk+fOjahy
+REXUp5bYomFDmGvR9YEbYE80aQ8A8zELNdB95iGCQG0DRqZacIOi9pB+gmbI20Jq
+614ZT1kNNaHb/xG1jH8sX2s+dJuzt1r2ZzkFPss47YxSWe3bDlsZ7j+YloOMOtQ2
+/iI7KfEW1zQOdIIBX+fuhP3sXab3/SvQgh7LGqmyI7ntXP66U1hzTqzC1zKAdNUf
+4CyXw4hKCJeaUI0TlQ1/cvOZo3Llt2nVi57Fc0QRrZgeRCXdaB0=
+=qFHC
 -----END PGP SIGNATURE-----
