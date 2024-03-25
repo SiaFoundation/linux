@@ -75,7 +75,7 @@ jobs:
         run: |
           TAG=${{ env.RELEASE_TAG }}
           if [ "${{env.RELEASE_COMPONENT}}" = "nightly" ]; then
-            VERSION=${date +%Y%m%d}-${{ env.RELEASE_TAG }}
+            VERSION=$(date +%Y%m%d)-${{ env.RELEASE_TAG }}
           else
             VERSION=${TAG:1}
           fi
@@ -193,7 +193,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
-          title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT}}): ${{ env.RELEASE_TAG }}'
+          title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT }}): ${{ env.RELEASE_TAG }}'
           body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
-          branch: ${{ env.PROJECT }}/${{env.RELEASE_COMPONENT}}/update
+          branch: ${{ env.PROJECT }}/${{env.RELEASE_COMPONENT }}/update
           base: master
