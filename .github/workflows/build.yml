@@ -74,7 +74,7 @@ jobs:
         shell: bash
         run: |
           TAG=${{ env.RELEASE_TAG }}
-          if [[ ${{env.RELEASE_COMPONENT}} == "nightly" ]]; then
+          if [ "${{env.RELEASE_COMPONENT}}" = "nightly" ]; then
             VERSION=${date +%Y%m%d}-${{ env.RELEASE_TAG }}
           else
             VERSION=${TAG:1}
