@@ -47,11 +47,13 @@ jobs:
             echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
             echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
             echo "WORKFLOW_ID=${{ github.event.inputs.workflow_id }}" >> $GITHUB_ENV
+            echo "RELEASE_COMPONENT=${{ github.event.inputs.component }}" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
             echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
             echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
             echo "DESCRIPTION=${{ github.event.client_payload.description }}" >> $GITHUB_ENV
             echo "WORKFLOW_ID=${{ github.event.client_payload.workflow_id }}" >> $GITHUB_ENV
+            echo "RELEASE_COMPONENT=${{ github.event.inputs.component }}" >> $GITHUB_ENV
           fi
           echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
 
@@ -72,7 +74,11 @@ jobs:
         shell: bash
         run: |
           TAG=${{ env.RELEASE_TAG }}
-          VERSION=${TAG:1}
+          if [[ ${{env.RELEASE_COMPONENT}} == "nightly" ]]; then
+            VERSION=${date +%Y%m%d}-${{ env.RELEASE_TAG }}
+          else
+            VERSION=${TAG:1}
+          fi
 
           for arch in amd64 arm64; do
             BUILD_NAME=${{ matrix.distro }}_${{ env.PROJECT }}_${VERSION}_${arch}
