@@ -5,22 +5,24 @@ on:
     types: [release-tagged]
   workflow_dispatch:
     inputs:
-        tag:
-            description: 'Version to build'
-            required: true
-            default: 'v1.0.2'
-        project: 
-            description: 'Project to build'
-            required: true
-            default: 'renterd'
-        description:
-            description: 'Description of the project'
-            required: true
-            default: 'Renterd: The Next-Gen Sia Renter'
-        workflow_id:
-            description: 'Workflow ID from which to download the artifact'
-            required: true
-            default: '7582058971'
+      tag:
+        description: 'Version to build'
+        required: true
+        default: 'v1.0.2'
+      project:
+        description: 'Project to build'
+        required: true
+      component:
+        description: 'The release component (main, beta, or nightly)'
+        required: true
+        default: 'main'
+      description:
+        description: 'Description of the project'
+        required: true
+        default: 'Renterd: The Next-Gen Sia Renter'
+      workflow_id:
+        description: 'Workflow ID from which to download the artifact'
+        required: true
 
 jobs:
   build:
@@ -106,6 +108,7 @@ jobs:
             echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
             echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
             echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
+            echo "TimeoutStopSec=120" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
             echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
 
             echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
@@ -138,11 +141,12 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
             echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
+            echo "RELEASE_COMPONENT=${{ github.event.inputs.component }}" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
             echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
             echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
+            echo "RELEASE_COMPONENT=${{ github.event.client_payload.component }}" >> $GITHUB_ENV
           fi
-
       - name: install dependencies
         run: |
           sudo apt-get update && sudo apt-get -y install reprepro
@@ -165,14 +169,14 @@ jobs:
           # loop over all supported debian releases
           for release in 'bookworm' 'bullseye' 'buster'; do
             for deb in ./debian_*.deb; do
-              reprepro -Vb ./debian includedeb ${release} $deb
+              reprepro -Vb ./debian -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
 
           # loop over all supported ubuntu releases
           for release in 'focal' 'jammy' 'mantic' 'noble'; do
             for deb in ./ubuntu_*.deb; do
-              reprepro -Vb ./ubuntu includedeb ${release} $deb
+              reprepro -Vb ./ubuntu -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
 
@@ -183,7 +187,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
-          title: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
+          title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT}}): ${{ env.RELEASE_TAG }}'
           body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
-          branch: ${{ env.PROJECT }}/update
+          branch: ${{ env.PROJECT }}/${{env.RELEASE_COMPONENT}}/update
           base: master
