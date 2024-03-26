@@ -195,5 +195,5 @@ jobs:
           commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
           title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT }}): ${{ env.RELEASE_TAG }}'
           body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
-          branch: ${{ env.PROJECT }}/${{env.RELEASE_COMPONENT }}/update
+          branch: ${{ env.PROJECT }}/update/${{env.RELEASE_COMPONENT }}/${{ env.RELEASE_TAG }}
           base: master
