@@ -13,16 +13,16 @@ Description: hostd: The Next-Gen Sia Host
 Homepage: https://github.com/SiaFoundation/hostd
 
 Package: renterd
-Version: 1.0.7-beta.1
+Version: 1.0.7-beta.2
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/beta/r/renterd/renterd_1.0.7-beta.1_arm64.deb
-Size: 7479844
-SHA256: 74ff6e318dbc88d6ce1511c464e8ec9196ad0fd4e9502ce532ab84a7d2a0a79f
-SHA1: 4e6237ed0abc6e79cb407b4f8d4138cb675f26f5
-MD5sum: 835427118dfde40ae6c8dffd46395225
+Filename: pool/beta/r/renterd/renterd_1.0.7-beta.2_arm64.deb
+Size: 7478436
+SHA256: c89b0d798953381ba5fa714fce4ec14d7060ee2e2dd845e2bbf75d6624386150
+SHA1: 25fcfdad7dd1831c66049d761a7041881e6e8e0a
+MD5sum: 842492a91295603dc2a98b8403e2d975
 Description: renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
