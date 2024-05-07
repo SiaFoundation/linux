@@ -1,5 +1,5 @@
 Codename: bookworm
-Date: Tue, 07 May 2024 14:44:42 UTC
+Date: Tue, 07 May 2024 16:57:46 UTC
 Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Debian packages
@@ -10,11 +10,11 @@ MD5Sum:
  270ac492001fa9c64fae0ba6b515b7f9 906 main/binary-arm64/Packages
  f41dcec8abe7d63fa165faa7ef56f2e4 480 main/binary-arm64/Packages.gz
  17c7c8fa05749cf8fbb4b75fa3723ee1 92 main/binary-arm64/Release
- 99b02e1a319794f39ca0253711b6d871 934 beta/binary-amd64/Packages
- a956333d8afbc2ac3f1ab6b5121e4a19 490 beta/binary-amd64/Packages.gz
+ d68abcb8ee490e1bba990546df877261 934 beta/binary-amd64/Packages
+ 065f62239cec3da96be61ea7b9435564 489 beta/binary-amd64/Packages.gz
  405c43795d22da8fdd9a3dc5d4ca24e7 92 beta/binary-amd64/Release
- f9dbd50c1f60720a214ea38bb2f982f7 934 beta/binary-arm64/Packages
- f405a508a089830c4f44890c67ad6963 491 beta/binary-arm64/Packages.gz
+ 0d25ad2564688e275ebafd866926c410 934 beta/binary-arm64/Packages
+ a637817327f2d8480169a225a90a0e39 491 beta/binary-arm64/Packages.gz
  b74710c09847bb67c533efc07701d3e4 92 beta/binary-arm64/Release
  d33bf49976478d27fd9c1688690fc132 952 nightly/binary-amd64/Packages
  917b0ab36d08667717dbfe4ff6b62b2c 491 nightly/binary-amd64/Packages.gz
@@ -29,11 +29,11 @@ SHA1:
  e10ed0f4a8de5e76e812107380d67ba97a73ea1b 906 main/binary-arm64/Packages
  b70975b436990ea98a2a81448e488b02d7224890 480 main/binary-arm64/Packages.gz
  4163a8dca3077328d63b87376fa4b38eccea034a 92 main/binary-arm64/Release
- 4b245735b81577b93240a98d59626d49f037e9c7 934 beta/binary-amd64/Packages
- 0404bea2bfcc73b11152fb1634a79673f68fdf50 490 beta/binary-amd64/Packages.gz
+ 4cd7d1dc44be0a9bc8591e9e5a83fe7b8bb0a448 934 beta/binary-amd64/Packages
+ 924e02197b610432befdc940cd9ec036d41d82ed 489 beta/binary-amd64/Packages.gz
  f2d62dbeb9b824303be1ac7e6c902a2664de8896 92 beta/binary-amd64/Release
- 22c2e879fcc2dc05143e0e53d8a3e4f2a1696d50 934 beta/binary-arm64/Packages
- cc475d9e70b5fb7b9fd584798185401b155709d2 491 beta/binary-arm64/Packages.gz
+ c6dd9e2c78a3f1b35c38f2bd17060a4aad7e203c 934 beta/binary-arm64/Packages
+ 598cff35278dd5611fcbcb835dd27100673101c9 491 beta/binary-arm64/Packages.gz
  9634e1973be02af3f8ac216cc774a6b861f20e1c 92 beta/binary-arm64/Release
  939eb074dc0856610712e25c187420d2bd5252e4 952 nightly/binary-amd64/Packages
  e9bf57b8fa83abb2759164a9b011bd40df9c5d34 491 nightly/binary-amd64/Packages.gz
@@ -48,11 +48,11 @@ SHA256:
  8e07d2485b1c89840a1b81dc6dba3f2529235e8cc2b831b038566500d48a198d 906 main/binary-arm64/Packages
  553b526eda1d47560f157645381df674a315ca55f63024afb75511653ee82a41 480 main/binary-arm64/Packages.gz
  3efb4b5e3d65c8930252b206a22375f57cec62ab7ef3f8e9542fe47ee9a6e482 92 main/binary-arm64/Release
- 8f25211fb2d87659fbdc0268aa912b353e254bca9fcf46c56b47e5a69ff96158 934 beta/binary-amd64/Packages
- edffd1dca9a4d8a82a67fe38b988be657918efc82c5e7f3216c4eea1493dda37 490 beta/binary-amd64/Packages.gz
+ 1b91a626abd435b05551db0c72ab1422ec6566774913d0b2c7a40c10dd6d486e 934 beta/binary-amd64/Packages
+ 3bf4d3a716500e3aa821c40f8f5ce47353be7bfedbdfec65eec18ea5b852702a 489 beta/binary-amd64/Packages.gz
  3f782aaf73d98b4692cf88b6dd539888257e63084e203976154f64a7abd55214 92 beta/binary-amd64/Release
- 354adcf530565036d8af22c31b68b673934f1b7b0492e2579038e658ee3a6617 934 beta/binary-arm64/Packages
- ffe34e101daaeeecfe5af695eeb4b9660d1863837c76aeb89c008ab336713184 491 beta/binary-arm64/Packages.gz
+ 05a796c79ae07e3aef3e9f9c5bc8d85a398a794b90ab5acda720f108d4ea33ef 934 beta/binary-arm64/Packages
+ 3921c9c9c7014e0726717a629852fdac9d71abc25121b84742d51877f344192e 491 beta/binary-arm64/Packages.gz
  49d1129cb42e312caee1336047aa5203ecdffa852eec940fde43a561436f1865 92 beta/binary-arm64/Release
  bca154a3bc60ebc1eb53efa98fed13cddff08164f7184873decc8d4c5e709e1b 952 nightly/binary-amd64/Packages
  ad639ce2cb2cd093c8a0d7f98b32995384bdb1f3c402b55a461f6362a6d941c7 491 nightly/binary-amd64/Packages.gz
