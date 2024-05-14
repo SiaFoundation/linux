@@ -62,12 +62,12 @@ jobs:
           apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC  apt-get -y install unzip dpkg-dev git
 
       - name: Download release artifacts from workflow
-        uses: dawidd6/action-download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: ${{ env.PROJECT }}
+          pattern: ${{ env.PROJECT }}-linux-*
           path: artifacts
           repo: SiaFoundation/${{ env.PROJECT }}
-          run_id: ${{ env.WORKFLOW_ID }}
+          run-id: ${{ env.WORKFLOW_ID }}
           workflow_conclusion: success
 
       - name: Build .deb packages
@@ -90,8 +90,7 @@ jobs:
             mkdir -p ${BUILD_NAME}/etc/systemd/system
 
             # Copy the ${{ env.PROJECT }} binary
-            unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
-            cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+            cp ./artifacts/${{ env.PROJECT }}-linux-${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
 
             # Create the control file
             echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
