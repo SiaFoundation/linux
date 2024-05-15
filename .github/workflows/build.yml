@@ -66,9 +66,8 @@ jobs:
         with:
           pattern: ${{ env.PROJECT }}-linux-*
           path: artifacts
-          repo: SiaFoundation/${{ env.PROJECT }}
+          repository: SiaFoundation/${{ env.PROJECT }}
           run-id: ${{ env.WORKFLOW_ID }}
-          workflow_conclusion: success
 
       - name: Build .deb packages
         shell: bash
