@@ -64,8 +64,10 @@ jobs:
       - name: Download release artifacts from workflow
         uses: actions/download-artifact@v4
         with:
+          github-token: ${{ secrets.PAT_ARTIFACT_DOWNLOAD }}
           pattern: ${{ env.PROJECT }}-linux-*
           path: artifacts
+          merge-multiple: true
           repository: SiaFoundation/${{ env.PROJECT }}
           run-id: ${{ env.WORKFLOW_ID }}
 
@@ -89,7 +91,8 @@ jobs:
             mkdir -p ${BUILD_NAME}/etc/systemd/system
 
             # Copy the ${{ env.PROJECT }} binary
-            cp ./artifacts/${{ env.PROJECT }}-linux-${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
+            unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+            cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
 
             # Create the control file
             echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
