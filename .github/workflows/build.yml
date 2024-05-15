@@ -24,6 +24,10 @@ on:
         description: 'Workflow ID from which to download the artifact'
         required: true
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
