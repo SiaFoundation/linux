@@ -69,7 +69,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.PAT_ARTIFACT_DOWNLOAD }}
-          pattern: ${{ env.PROJECT }}-linux-*
+          pattern: ${{ env.PROJECT }}_linux_*
           path: artifacts
           merge-multiple: true
           repository: SiaFoundation/${{ env.PROJECT }}
