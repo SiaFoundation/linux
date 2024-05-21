@@ -1,5 +1,5 @@
 Codename: buster
-Date: Mon, 20 May 2024 16:32:23 UTC
+Date: Tue, 21 May 2024 17:28:37 UTC
 Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Debian packages
@@ -16,11 +16,11 @@ MD5Sum:
  0d25ad2564688e275ebafd866926c410 934 beta/binary-arm64/Packages
  a637817327f2d8480169a225a90a0e39 491 beta/binary-arm64/Packages.gz
  b74710c09847bb67c533efc07701d3e4 92 beta/binary-arm64/Release
- cfc7e21474bde86a2d92aa9bfc0083b8 1434 nightly/binary-amd64/Packages
- e1751be0ea21ae56cb169e726cdd8c93 623 nightly/binary-amd64/Packages.gz
+ 051ecd4ab4d2b66b8361695ae2810e5f 1434 nightly/binary-amd64/Packages
+ 185d51993939f2e2bb4ff4f91b872fea 624 nightly/binary-amd64/Packages.gz
  786f474f222c50f027f8832817eb2df3 95 nightly/binary-amd64/Release
- f2aa698c50cc2438aeae10b50f770be0 1434 nightly/binary-arm64/Packages
- 10e2953621d4ac2b20bdb5a7f4980d4c 624 nightly/binary-arm64/Packages.gz
+ 7604c620218e8204daaa363023cf9736 1434 nightly/binary-arm64/Packages
+ 68876444dfd5c0d1199c53059cfcb8b7 622 nightly/binary-arm64/Packages.gz
  c1a544cff382d6114a65cc3a6a5ecb0c 95 nightly/binary-arm64/Release
 SHA1:
  273ccb65a4694630bd7187d80145e2f6be6717f5 906 main/binary-amd64/Packages
@@ -35,11 +35,11 @@ SHA1:
  c6dd9e2c78a3f1b35c38f2bd17060a4aad7e203c 934 beta/binary-arm64/Packages
  598cff35278dd5611fcbcb835dd27100673101c9 491 beta/binary-arm64/Packages.gz
  9634e1973be02af3f8ac216cc774a6b861f20e1c 92 beta/binary-arm64/Release
- 6078c28338cd3589f4d727331e9fdc94f8ac1534 1434 nightly/binary-amd64/Packages
- 005b667c484b2262022005ddbd00b1582310fb20 623 nightly/binary-amd64/Packages.gz
+ 43b3fbbb3a953c9807639e76951ae23a5e91349d 1434 nightly/binary-amd64/Packages
+ dcd53cc3ee84ff4036b358cf96e41d93c125dad8 624 nightly/binary-amd64/Packages.gz
  f107c6dfc42ab75a28f3d5bbbe444e323383e338 95 nightly/binary-amd64/Release
- 00252395e9e2b88ba5785213f4faa4cb44413414 1434 nightly/binary-arm64/Packages
- 13ee59d1f718456c877dcea4b3a02f426f095083 624 nightly/binary-arm64/Packages.gz
+ cf673d08678351e78b627d31392669a635d97da4 1434 nightly/binary-arm64/Packages
+ 698e107147ce2799b758b9780f4af40ccbba9f16 622 nightly/binary-arm64/Packages.gz
  a786b13f1c5774ee8b6a4bc15a648768ad7bc43a 95 nightly/binary-arm64/Release
 SHA256:
  791868b8bab25aeb1f8ce96564cf44133094de6d408bc974b9a09a7ba790121e 906 main/binary-amd64/Packages
@@ -54,9 +54,9 @@ SHA256:
  05a796c79ae07e3aef3e9f9c5bc8d85a398a794b90ab5acda720f108d4ea33ef 934 beta/binary-arm64/Packages
  3921c9c9c7014e0726717a629852fdac9d71abc25121b84742d51877f344192e 491 beta/binary-arm64/Packages.gz
  49d1129cb42e312caee1336047aa5203ecdffa852eec940fde43a561436f1865 92 beta/binary-arm64/Release
- 43fd88fd4d3e0eb44365e10e68f94e6069667bbb448f6c51d55f9da660b2d2b1 1434 nightly/binary-amd64/Packages
- ea4582554ab0720b1a5d1d157fe721dc8cd3afab13eb36cfd90e8bfd0b48e34d 623 nightly/binary-amd64/Packages.gz
+ 6ff973e02b197148de6aa0ac16de66a143a1674d0b826c282aba826b289f8277 1434 nightly/binary-amd64/Packages
+ e6bc08584964fae905aaa7f13133a335d1561b3b9e14567f193f24752ce39ff0 624 nightly/binary-amd64/Packages.gz
  b109280b82c7b6845e78766aa05ac5c3a6b22dd91ce5afa8c0465a79d4d992bb 95 nightly/binary-amd64/Release
- 0fe9a400837c37407780750995f6e29ee81505640396a3d3d6bfdea6b64c1709 1434 nightly/binary-arm64/Packages
- 27a4b6ffe750fb57e92bbf90c1075818f59eaec259022de50e9b7838bc21a4c5 624 nightly/binary-arm64/Packages.gz
+ 7be44adf9d7766d34cf0627b5173777c986f9d4838bbe1699fb449e784d16718 1434 nightly/binary-arm64/Packages
+ 9696a313c2cf4e5065f537486fd6a9034565c26b0ea2cca251b9bcc305882bcc 622 nightly/binary-arm64/Packages.gz
  daf8fc0e49f5dcdac641022d4f20413426b7d9dc05a20581e69e666f14bbced4 95 nightly/binary-arm64/Release
