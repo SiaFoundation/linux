@@ -1,42 +1,28 @@
 Package: hostd
-Version: 20240522-master
+Version: 20240423-master
 Architecture: amd64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/nightly/h/hostd/hostd_20240522-master_amd64.deb
-Size: 8164760
-SHA256: ae72c3759c54889d270b371813afaf63924b474c39a2d7ce74437199e8c274bf
-SHA1: a1cb769e74ab35dd8d5c10fa124bb210e436e93c
-MD5sum: fe7ae07bea6f97bfecb9b777b793cf0e
+Filename: pool/nightly/h/hostd/hostd_20240423-master_amd64.deb
+Size: 8157924
+SHA256: 405a4023cf3d1a255ed7dc12422f9a2e9fcba4eee12882de94a2e67229ae626c
+SHA1: 1a236171a4ffb0d9ec58a5d268d8a445486e9bde
+MD5sum: 4a220ab99c06c5bb9ed44eecc517259b
 Description: hostd: The Next-Gen Sia Host
 Homepage: https://github.com/SiaFoundation/hostd
 
 Package: renterd
-Version: 20240424-master
+Version: 20240524-master
 Architecture: amd64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/nightly/r/renterd/renterd_20240424-master_amd64.deb
-Size: 8371152
-SHA256: 2ff849abee4cad8aa4c5fbda99fb8b423a04b3602e09f9fdfefb65d393d4f8c9
-SHA1: e0d87c525f2db2eadccbe43b55df1851181fff84
-MD5sum: 4a9bce3b11128ae3bcdd6fa9f554155d
+Filename: pool/nightly/r/renterd/renterd_20240524-master_amd64.deb
+Size: 8375704
+SHA256: 227876790f9fa47236edb1965f8c0ec42c99f611c201fedd25e196435297443b
+SHA1: c7eb8b3e192f78a4f6b41690bdeed0ea1211a094
+MD5sum: 04e4f6cb31efc0a80926d2f02478ff24
 Description: renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
-
-Package: walletd
-Version: 20240517-master
-Architecture: amd64
-Maintainer: The Sia Foundation <hello@sia.tech>
-Priority: optional
-Section: net
-Filename: pool/nightly/w/walletd/walletd_20240517-master_amd64.deb
-Size: 8026996
-SHA256: 4c277d9527b7049782dfcbf5481b9010c2392786e8dd9c23c81799d43f3cb99b
-SHA1: 0bb9d21cfd6f44885aaf8f1e7aab9ac15f0c4c2f
-MD5sum: f8e9fa3865ab7c1bc8b40a9e255a472f
-Description: walletd: The Next-Gen Sia Wallet
-Homepage: https://github.com/SiaFoundation/walletd
 
