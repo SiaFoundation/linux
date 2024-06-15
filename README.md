@@ -68,7 +68,7 @@ $ cd /var/lib/hostd
 $ hostd config
 
 # enable hostd systemd service
-$ sudo apt enable --now hostd
+$ sudo systemctl enable --now hostd
 ```
 
 If you want to install a different package just replace `hostd` in the
