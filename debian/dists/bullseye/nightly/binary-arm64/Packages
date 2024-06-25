@@ -1,14 +1,14 @@
 Package: hostd
-Version: 20240621-master
+Version: 20240624-master
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/nightly/h/hostd/hostd_20240621-master_arm64.deb
-Size: 6573676
-SHA256: 7bd0bc3751a1c009bcfa5af3c9bd1481f2e86ba6d9e32c6d26937e53dadb78e1
-SHA1: ce84cd90fbabb1c5bd00297f915b8a7dcdcfffcc
-MD5sum: 0a69cd77075d27c67da6e779ec9b37b0
+Filename: pool/nightly/h/hostd/hostd_20240624-master_arm64.deb
+Size: 6574960
+SHA256: a990682bef6c64487e1bea3eaf3eda8e38b046bd0b8b3f5389fa7542411fb190
+SHA1: a015ae3f146785842b38d3c3f1f452e0a2a87b14
+MD5sum: f6c2be11ebee5ef613d99917a4d1ab57
 Description: hostd: The Next-Gen Sia Host
 Homepage: https://github.com/SiaFoundation/hostd
 
