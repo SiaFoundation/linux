@@ -1,14 +1,14 @@
 Package: hostd
-Version: 1.1.1-beta.1
+Version: 1.1.1-beta.2
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/beta/h/hostd/hostd_1.1.1-beta.1_arm64.deb
-Size: 6568768
-SHA256: 32649e3524223fe9bcc2f3d19245ccfe10866c4fc39c25872c364a2cdb943042
-SHA1: e225b22ff0aac58bdca51605f0684330bb19c4b0
-MD5sum: 5e3009682e492541f0f113b3876df88a
+Filename: pool/beta/h/hostd/hostd_1.1.1-beta.2_arm64.deb
+Size: 6569548
+SHA256: 949b153aa032366e99d49140483f7ad9dff9b7642a4d5d90fafe4ed0e72ea731
+SHA1: cf22120704ad371175837050ff12088f1383382e
+MD5sum: af1a552008d6db95ce6e68717c2532f0
 Description: hostd: The Next-Gen Sia Host
 Homepage: https://github.com/SiaFoundation/hostd
 
