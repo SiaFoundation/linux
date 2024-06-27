@@ -26,3 +26,17 @@ MD5sum: 8122b3dbeba8d373c5354e2cabbb2214
 Description: renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
+Package: walletd
+Version: 0.8.0-beta.1
+Architecture: arm64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/beta/w/walletd/walletd_0.8.0-beta.1_arm64.deb
+Size: 6783728
+SHA256: 4f3698ed8a694b0e8fe0c68516238710fecc5c1f0da6f9a4da96d04bec465979
+SHA1: adcc8c97cec6c9c33dca4bef8c3234ef655fdfc1
+MD5sum: 543c7f05727126dfb0527e93fff2fafd
+Description: walletd: The Next-Gen Sia Wallet
+Homepage: https://github.com/SiaFoundation/walletd
+
