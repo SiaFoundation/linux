@@ -2,7 +2,7 @@
 Hash: SHA512
 
 Codename: buster
-Date: Tue, 09 Jul 2024 08:42:26 UTC
+Date: Tue, 09 Jul 2024 08:51:47 UTC
 Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Debian packages
@@ -19,11 +19,11 @@ MD5Sum:
  26b86d7341de3e3f6d6b2547c3ed1003 1407 beta/binary-arm64/Packages
  25d4ff0ed8d4fa4bad7ef8c52ed5c45d 622 beta/binary-arm64/Packages.gz
  b74710c09847bb67c533efc07701d3e4 92 beta/binary-arm64/Release
- 52e51000ac88742ce287fadf1814b89e 1434 nightly/binary-amd64/Packages
- 86a72d33100017152d7a82ea141c576e 625 nightly/binary-amd64/Packages.gz
+ cf3100beb81d6866b3bd94a709b2052e 1434 nightly/binary-amd64/Packages
+ 714ba65b8ac93b0ab422174f5dd29eb5 619 nightly/binary-amd64/Packages.gz
  786f474f222c50f027f8832817eb2df3 95 nightly/binary-amd64/Release
- fc25ed7a93543aae3c538e3788a00762 1434 nightly/binary-arm64/Packages
- 880bc2eed27faa59994439d5ef8e0728 630 nightly/binary-arm64/Packages.gz
+ 996fd77e3c515a6a564b5bd8b159a7f7 1434 nightly/binary-arm64/Packages
+ 99e15a07f35027cc22baea0d3cd3087a 622 nightly/binary-arm64/Packages.gz
  c1a544cff382d6114a65cc3a6a5ecb0c 95 nightly/binary-arm64/Release
 SHA1:
  250aec53c53fbc67682c55b472ce7fb8cfb1ec61 906 main/binary-amd64/Packages
@@ -38,11 +38,11 @@ SHA1:
  38a9b153f3f8b13fb4c91637a4e9994cf674de85 1407 beta/binary-arm64/Packages
  9da82d8ef35a60b068bdf5eac7167283ebf109ba 622 beta/binary-arm64/Packages.gz
  9634e1973be02af3f8ac216cc774a6b861f20e1c 92 beta/binary-arm64/Release
- 9bf1941d212254a90b14d8d528dcd4e166879108 1434 nightly/binary-amd64/Packages
- 86eca432541f31ff27c417b454b8dcb180cb5527 625 nightly/binary-amd64/Packages.gz
+ f83599cf85b9df82e4793b6c75550c699f725e46 1434 nightly/binary-amd64/Packages
+ 94f9397d3c2a675bfde8defe44984d6676576938 619 nightly/binary-amd64/Packages.gz
  f107c6dfc42ab75a28f3d5bbbe444e323383e338 95 nightly/binary-amd64/Release
- 9e2e6f699b0afd72c9eb65ffefb67b85da727ce6 1434 nightly/binary-arm64/Packages
- 9efc92d7f88929d759e37c0229f2da9ae47f80d8 630 nightly/binary-arm64/Packages.gz
+ 12faa7932a35b9569e7d2bc2de71d06da4fb69a6 1434 nightly/binary-arm64/Packages
+ 6602db61527c3e3b62ab6008ca762d0566d6aec4 622 nightly/binary-arm64/Packages.gz
  a786b13f1c5774ee8b6a4bc15a648768ad7bc43a 95 nightly/binary-arm64/Release
 SHA256:
  3469ce1b987de853d16a64a331129596f0f102a5558ad94273edc2e9b23a8a4c 906 main/binary-amd64/Packages
@@ -57,25 +57,25 @@ SHA256:
  b46a3d31a9c3ae8d4e60343780286f312006669acdc794fb23bc38bbe6f18ca8 1407 beta/binary-arm64/Packages
  2635beb4c5adb94ebae4d877fa3ed6fd44d2551ca0e0a3846e17bc24b224da82 622 beta/binary-arm64/Packages.gz
  49d1129cb42e312caee1336047aa5203ecdffa852eec940fde43a561436f1865 92 beta/binary-arm64/Release
- 5e6e4cd586e9979604bcce9db6300f564a1edd9a2cbe8afacb67df735d113038 1434 nightly/binary-amd64/Packages
- 698f5318618a4f8432d077edc634b429fd4d4bf6e7ba5eb6ffe40fb08761ad26 625 nightly/binary-amd64/Packages.gz
+ 63db5e4463e40a686d32da94b5a1d1a0948ddcd5780871f415c8c66dc41f2bae 1434 nightly/binary-amd64/Packages
+ 50e80e3594764e425dc2212115794d7faedcfdf70aa30bd96d630610c8936d81 619 nightly/binary-amd64/Packages.gz
  b109280b82c7b6845e78766aa05ac5c3a6b22dd91ce5afa8c0465a79d4d992bb 95 nightly/binary-amd64/Release
- 97c29e780cd5d7010fe033a2343d2e4e7300a83602c66435301f66a85f682ff1 1434 nightly/binary-arm64/Packages
- d6ad8dc4849596136077a9e6e1e8c86415f74a4033eb1fa7f1f731b06d89f3a6 630 nightly/binary-arm64/Packages.gz
+ a6c68d8c81c8b7309dc94daa32fad81b00fa007a003ac8d9aef0d116bf5d560a 1434 nightly/binary-arm64/Packages
+ 664de8dde8bcbbe70d333bd2b2afd0763c2163003916ed6a59059801df36027b 622 nightly/binary-arm64/Packages.gz
  daf8fc0e49f5dcdac641022d4f20413426b7d9dc05a20581e69e666f14bbced4 95 nightly/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmaM9/IACgkQkmYLCQNk
-yi/6Cw/6AgtZDIL2Y4izOkk6gegqjJZCCO157iWE/1Xe6DAB1+9QFTpM4OavUh4C
-XTghiuBbbgeuPmNCoCOtt05Qe7M1iOEHpq/tXJOWpRdLr7W5dv8ZjUgzb5UOUCNP
-79pDtfd12EkBsVPIvGFcbOriqUQwQF9IlTfc8vcgmRhbSWvYfngaFvjUAv40aYQ/
-HkdzzT1US9+NHptEqF4uHelggfys0yGoZT0gh5xyx0o9+HBVY8gqm9HnLLCw5uEp
-gFELOqPNxqY6iEgJxXzK6FGm1X9lsc9vnbvpxpj9LJ5B9IEYU42ITGEEf2zyBYyf
-3ryCQyJn21geKdpDd/0KJuhhb74CRBAByUXE3Dh4feAK9mGdjRlNQRbFi2PZMFTm
-Y4fGANhizlVjuELb3vRZX0RmkKHbFlRM3OiSdl46FnRHcX85OazayAWvkHZtXRuX
-1cWB0Up2/wATnzqTQ+TCXuz2KxbLvby72UGfclZqAyuE8ZpFmj3hoYgN/ThoYuLN
-VWsXVOOLy6WdK7cGxDFJrUTotAp76zEcw0rurnJ40+9EMIU9vsHPfQ280uvjHU65
-O0OkrnATtf/Cv3bDS3D+xzRKRr8IfVq6qcLXck6bJQSu6i2ZyUd7G3YaPLhQ7e3T
-uozXUeTwJOXpHci4ptvrk2JCxhaGp0ZxvJWVmlJTWZM8RbZkn1U=
-=hWgc
+iQIzBAEBCgAdFiEElG2AFXUOzHJK/ehukmYLCQNkyi8FAmaM+iMACgkQkmYLCQNk
+yi+AmA/+PNCmUfYBXFU2/GERDsAqbViRs5UrCibDgZRVqsKBt8+UtDu4aZb/qv3z
+fI62ypeUinJORSBkvJr1O2p4TjVf6c9CU9fVw8GLcxzSVXElMpQxAGMinP5kw0W/
+ayRf68/ESByiOh+qBMpiJ8XjTKZ6pkbnKRrZw0Ha8O7xhzT0EJPJOFV8OOX8Xke5
+xwS2k4FqSSRx5RfSX76DFxu93xoBgSF5aFm3gHo5V5pXihA5yT70rEBFAO/8LCKM
+Cd33t3WCTY2J5Fl5bW8L/UF+vE8yaowHU5TiOjiJjrLSo6UZVUfdR8R4MnCesjGC
+dGEeK02iANUJE4RHefuMFbo1w4yctCn8sA/acS5DVzNOO17D7x6J44x8s7zWDy7M
+N8st2ZVJaL40UI24PEQ90rzhsbbur6iu1ePnhFGBAjg/6Dh5fVNw04AeKskKC7Sb
+o0WUj8hcoSY4UTniISZHxqKq+1yZlxg+zo4QWNdjjlcFwq6eOM2wj/atXBDlJghz
+PRU4RzSPBwWEAIQPLrEHwcHnK486h2m2udS33NlGMI0ym6rUL2J/SK31ytBclOc1
+Xobp6ozDqUI2gtCltKcUbrhvlr/0Uk2YdVGIb6dlYIlPtJtUTArqWUK+V8l+mOJH
+ArO9DNYv0d8bycJtrg+cEPYk1BrnwXCGMAAXDd2xHtZ1HhCgr1s=
+=zAuN
 -----END PGP SIGNATURE-----
