@@ -1,5 +1,5 @@
 Codename: mantic
-Date: Tue, 16 Jul 2024 17:03:48 UTC
+Date: Thu, 25 Jul 2024 14:04:58 UTC
 Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Ubuntu packages
@@ -16,11 +16,11 @@ MD5Sum:
  f4340e9c68f6f6ad30cdaa36aa39989c 1407 beta/binary-arm64/Packages
  a07f8913bd0162774f3776f2d10ebbf9 624 beta/binary-arm64/Packages.gz
  81646ba6009fef879454d686034f50b2 92 beta/binary-arm64/Release
- 51c0365df329a2fc8b747caaf7f39891 1434 nightly/binary-amd64/Packages
- afb1b5cb816dbff47a1e7c1083855cf7 619 nightly/binary-amd64/Packages.gz
+ c418787e18d628a4f156d0bba5a2d1c4 1434 nightly/binary-amd64/Packages
+ 303e7998e62aeeacfc5d4fb5c4e0c867 627 nightly/binary-amd64/Packages.gz
  eeeb2e1644111f70d7656b283494ea54 95 nightly/binary-amd64/Release
- a177a8857183525a3d09b1b6a3afc022 1434 nightly/binary-arm64/Packages
- 0023400702c53a24ce37d07f33d303c8 619 nightly/binary-arm64/Packages.gz
+ 88bee64ede6b6672e476ac124611977a 1434 nightly/binary-arm64/Packages
+ 64587481b8429d50eaca87133eb2a2cb 628 nightly/binary-arm64/Packages.gz
  29f2fff0b10ef865feb44a1433c05eee 95 nightly/binary-arm64/Release
 SHA1:
  156ac87aec2f455eba1a73a2f49eae3c0b011792 906 main/binary-amd64/Packages
@@ -35,11 +35,11 @@ SHA1:
  7d8129d5a6665f98d3836a0e73e0c24ae961bad2 1407 beta/binary-arm64/Packages
  b6e30798d0ae28025e02a0bfc1b3763e3e4888f5 624 beta/binary-arm64/Packages.gz
  6636172acb71f54841b5fa7239d4adcf0af705d4 92 beta/binary-arm64/Release
- 11e07fb7eca5d55cb86541b8a09fbaa584cb36da 1434 nightly/binary-amd64/Packages
- e29ead2fb6b09cc58ba05a0e5ae5e38b1ab317e3 619 nightly/binary-amd64/Packages.gz
+ 9bcc5a69781a4b3af63301f95b92c1e383cb0660 1434 nightly/binary-amd64/Packages
+ 2a4153591ad25a790e1d1c4c10a7a45a7ecf6602 627 nightly/binary-amd64/Packages.gz
  c2fe109e388e8708802154c87d48c953457deb19 95 nightly/binary-amd64/Release
- a7bcadd8c4e85e5652d0cad75a7013c65a083df1 1434 nightly/binary-arm64/Packages
- 60d3cd85eb2eb6f085178886414c1162f4ee0f13 619 nightly/binary-arm64/Packages.gz
+ 3f4736e8b3f6519df42c6be0b3955d1ca57b6732 1434 nightly/binary-arm64/Packages
+ 5e4ef96738505995d4ac9e34404fda3bb9fbb0a5 628 nightly/binary-arm64/Packages.gz
  283f683195fd2338e90624882239c95f1d158329 95 nightly/binary-arm64/Release
 SHA256:
  5a09c16c970a85a5ed51bc00e95e87b4e8f57a2e5c4d43aedf0bf4730b0ad9f3 906 main/binary-amd64/Packages
@@ -54,9 +54,9 @@ SHA256:
  c74de86f6c4fd5478a2f2422ec7279f9558eb1c62c8ef6ad4507bdbb88d6dbdc 1407 beta/binary-arm64/Packages
  3e5c3f5b652cf7bd153de377ad9f9657b4a7b87050098d6ae55c82e4562b5b20 624 beta/binary-arm64/Packages.gz
  fddb2539c163122e6f529ae5f28d040791255c2a9bd06aa7d4ea8915092485f9 92 beta/binary-arm64/Release
- 83f3687a083dfda7c657a78d75497d505f5994e94a2ee6f9b97f323ea11bc78c 1434 nightly/binary-amd64/Packages
- 6fbc31bfeb02048f01099368bbe14f660d0516234919f57b1963739a7015a043 619 nightly/binary-amd64/Packages.gz
+ c4733eeaa12eee3d1365dfeb6eb3aa29261d26b44a8f1f96340586846f387a7f 1434 nightly/binary-amd64/Packages
+ 5573ac9fcfee6c2fe53b00f6878401a3509e6d262b7ffc02ef4b70627276c978 627 nightly/binary-amd64/Packages.gz
  6146ebecccf01125f41db70dcb6f021f49e98aa6c0e050e811e2a442063119a5 95 nightly/binary-amd64/Release
- b5725931018d5040c746d6f7cea600fd5191261b78ce6e636d04cb3d06374871 1434 nightly/binary-arm64/Packages
- d5dc897ded2ec80745685c5be3a554dd941e67e83a6f107700c263b0bead2878 619 nightly/binary-arm64/Packages.gz
+ 96d8f046bc33301925d48562e2b46be841ca13c24f6b07951a981e4c49a6a6b1 1434 nightly/binary-arm64/Packages
+ 4535c45e7990be34f2497a74e16eb5d371623e3122b3874e9fb20c54d7ce9371 628 nightly/binary-arm64/Packages.gz
  a42081d557776ba055ca7a9ace538bcc46bd5fb7395dcab331bdfbd1f56f34b5 95 nightly/binary-arm64/Release
