@@ -13,16 +13,16 @@ Description: hostd: The Next-Gen Sia Host
 Homepage: https://github.com/SiaFoundation/hostd
 
 Package: renterd
-Version: 20240916-master
+Version: 20240919-master
 Architecture: amd64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/nightly/r/renterd/renterd_20240916-master_amd64.deb
-Size: 7865192
-SHA256: a5ad75fc70c2c6a4f0e7d3a0def4529ef245bc8994851ece78791090ac00eea8
-SHA1: 92a02ea369eaa638cfa7675055f8991f61f6618e
-MD5sum: 0fdc174faa126eff75d94dc6435ff1f6
+Filename: pool/nightly/r/renterd/renterd_20240919-master_amd64.deb
+Size: 7865856
+SHA256: 01ceb9c4f79edbb526bf7b15b1e6070fd7685d552d28fe84646f2c7042f0e338
+SHA1: ddcfbba1ee0072383b76753d679fa54dc26e5d09
+MD5sum: b78cf9239e240af2192f1fe95631e52a
 Description: renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
