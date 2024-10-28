@@ -6,22 +6,22 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Version to build'
+        description: "Version to build"
         required: true
-        default: 'v1.0.2'
+        default: "v1.0.2"
       project:
-        description: 'Project to build'
+        description: "Project to build"
         required: true
       component:
-        description: 'The release component (main, beta, or nightly)'
+        description: "The release component (main, beta, or nightly)"
         required: true
-        default: 'main'
+        default: "main"
       description:
-        description: 'Description of the project'
+        description: "Description of the project"
         required: true
-        default: 'Renterd: The Next-Gen Sia Renter'
+        default: "Renterd: The Next-Gen Sia Renter"
       workflow_id:
-        description: 'Workflow ID from which to download the artifact'
+        description: "Workflow ID from which to download the artifact"
         required: true
 
 concurrency:
@@ -36,11 +36,11 @@ jobs:
         # Use oldest supported versions of each distro
         include:
           # Debian 10
-          - distro: 'debian'
-            release: 'buster'
+          - distro: "debian"
+            release: "buster"
           # Ubuntu 20.04
-          - distro: 'ubuntu'
-            release: 'focal'
+          - distro: "ubuntu"
+            release: "focal"
     container:
       image: ${{ matrix.distro }}:${{ matrix.release }}
     steps:
@@ -141,7 +141,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.distro }}
-          path: '*.deb'
+          path: "*.deb"
 
   create-pull-request:
     needs: build
@@ -194,11 +194,11 @@ jobs:
           rm -rf *.deb
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
-          title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT }}): ${{ env.RELEASE_TAG }}'
-          body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
+          commit-message: "${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}"
+          title: "${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT }}): ${{ env.RELEASE_TAG }}"
+          body: "This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}"
           branch: ${{ env.PROJECT }}/update/${{env.RELEASE_COMPONENT }}/${{ env.RELEASE_TAG }}
           base: master
