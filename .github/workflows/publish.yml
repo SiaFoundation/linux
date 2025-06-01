@@ -29,6 +29,6 @@ jobs:
           file: ${{ inputs.dockerfile }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: latest
+          tags: ghcr.io/siafoundation/linux:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
