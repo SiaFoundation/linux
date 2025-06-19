@@ -73,3 +73,22 @@ $ sudo systemctl enable --now hostd
 
 If you want to install a different package just replace `hostd` in the
 commands with a different package name.
+
+
+## Upgrading Packages
+
+There is a small issue during upgrade `hostd`, see https://github.com/SiaFoundation/linux/issues/179
+eg: overwritten of `/etc/systemd/system/hostd.service` and make disabled hostd.service.
+
+It can be mitigate by:
+
+```bash
+# save old content of /etc/systemd/system/hostd.service (if you have change it)
+$ sudo systemctl stop hostd.service
+$ sudo apt-mark unhold hostd
+$ sudo apt upgrade hostd
+$ sudo systemctl enable --now hostd # IMPORTANT
+
+# hold package to prevent upgrade via `apt upgrade -y`
+$ sudo apt-mark hold hostd
+```
