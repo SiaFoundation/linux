@@ -35,12 +35,12 @@ jobs:
       matrix:
         # Use oldest supported versions of each distro
         include:
-          # Debian 10
+          # Debian 11
           - distro: 'debian'
-            release: 'buster'
-          # Ubuntu 20.04
+            release: 'bullseye'
+          # Ubuntu 22.04.5
           - distro: 'ubuntu'
-            release: 'focal'
+            release: 'jammy'
     container:
       image: ${{ matrix.distro }}:${{ matrix.release }}
     steps:
@@ -178,14 +178,14 @@ jobs:
         shell: bash
         run: |
           # loop over all supported debian releases
-          for release in 'bookworm' 'bullseye' 'buster'; do
+          for release in 'bookworm' 'bullseye'; do
             for deb in ./debian_*.deb; do
               reprepro -Vb ./debian -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
 
           # loop over all supported ubuntu releases
-          for release in 'focal' 'jammy' 'mantic' 'noble'; do
+          for release in 'jammy' 'mantic' 'noble' 'plucky'; do
             for deb in ./ubuntu_*.deb; do
               reprepro -Vb ./ubuntu -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
