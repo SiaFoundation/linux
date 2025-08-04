@@ -17,12 +17,10 @@ their corresponding release.
 - `debian`
     - `bookworm`
     - `bullseye`
-    - `buster`
 - `ubuntu`
-    - `focal`
-    - `jammy`
-    - `mantic`
+    - `plucky`
     - `noble`
+    - `jammy`
 
 ```bash
 sudo curl -fsSL https://linux.sia.tech/<distro>/gpg | sudo gpg --dearmor -o /usr/share/keyrings/siafoundation.gpg
