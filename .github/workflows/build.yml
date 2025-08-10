@@ -28,6 +28,10 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -194,11 +198,16 @@ jobs:
           rm -rf *.deb
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
+        id: create_pr
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
           commit-message: '${{ env.PROJECT }}: ${{ env.RELEASE_TAG }}'
           title: '${{ env.PROJECT }} (${{ env.RELEASE_COMPONENT }}): ${{ env.RELEASE_TAG }}'
           body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
           branch: ${{ env.PROJECT }}/update/${{env.RELEASE_COMPONENT }}/${{ env.RELEASE_TAG }}
           base: master
+      - name: Automerge
+        run: gh pr merge --merge --auto "${{ steps.create_pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
