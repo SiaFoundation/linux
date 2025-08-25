@@ -182,7 +182,7 @@ jobs:
         shell: bash
         run: |
           # loop over all supported debian releases
-          for release in 'bookworm' 'bullseye'; do
+          for release in 'trixie' 'bookworm' 'bullseye'; do
             for deb in ./debian_*.deb; do
               reprepro -Vb ./debian -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
