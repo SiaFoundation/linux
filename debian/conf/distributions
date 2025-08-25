@@ -21,3 +21,9 @@ Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Debian packages
 SignWith: yes
+
+Codename: trixie
+Architectures: amd64 arm64
+Components: main beta nightly
+Description: The official home of Sia's Debian packages
+SignWith: yes
