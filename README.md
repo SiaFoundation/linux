@@ -15,6 +15,7 @@ Add this repo to your sources by running the following command, replacing
 their corresponding release.
 
 - `debian`
+    - `trixie`
     - `bookworm`
     - `bullseye`
 - `ubuntu`
