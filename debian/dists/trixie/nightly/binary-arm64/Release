@@ -1,0 +1,3 @@
+Component: nightly
+Architecture: arm64
+Description: The official home of Sia's Debian packages
