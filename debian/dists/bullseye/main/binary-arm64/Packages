@@ -27,16 +27,16 @@ Description: Renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
 Package: walletd
-Version: 2.10.2
+Version: 2.11.0
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/main/w/walletd/walletd_2.10.2_arm64.deb
-Size: 7237124
-SHA256: 8a886bdf4cfc74c4f564c54323e59b6cda4b7f5e93a996f0483576b793cc12b7
-SHA1: 82e84be0152e4d762c586c82d9b9b4e0c90c4170
-MD5sum: 699cfc6a226f86225a7a67520e14c587
+Filename: pool/main/w/walletd/walletd_2.11.0_arm64.deb
+Size: 7654072
+SHA256: 2c00d275396fc3a65b22408f8dd02c866207159e652a17e2326d321bf3a360db
+SHA1: 8d176fef57cc06d24a095a33a9f896747e7607aa
+MD5sum: 216fb7f3106d598a84f20c77711ce0ed
 Description: walletd: The next generation Sia wallet
 Homepage: https://github.com/SiaFoundation/walletd
 
