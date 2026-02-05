@@ -189,7 +189,7 @@ jobs:
           done
 
           # loop over all supported ubuntu releases
-          for release in 'jammy' 'mantic' 'noble' 'plucky'; do
+          for release in 'jammy' 'mantic' 'noble'; do
             for deb in ./ubuntu_*.deb; do
               reprepro -Vb ./ubuntu -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done

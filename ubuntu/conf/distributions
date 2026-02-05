@@ -21,9 +21,3 @@ Architectures: amd64 arm64
 Components: main beta nightly
 Description: The official home of Sia's Ubuntu packages
 SignWith: yes
-
-Codename: plucky
-Architectures: amd64 arm64
-Components: main beta nightly
-Description: The official home of Sia's Ubuntu packages
-SignWith: yes

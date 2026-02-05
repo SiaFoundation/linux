@@ -19,7 +19,6 @@ their corresponding release.
     - `bookworm`
     - `bullseye`
 - `ubuntu`
-    - `plucky`
     - `noble`
     - `jammy`
 
