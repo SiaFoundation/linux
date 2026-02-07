@@ -19,6 +19,7 @@ their corresponding release.
     - `bookworm`
     - `bullseye`
 - `ubuntu`
+    - `questing`
     - `noble`
     - `jammy`
 
