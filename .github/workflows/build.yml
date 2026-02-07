@@ -182,14 +182,14 @@ jobs:
         shell: bash
         run: |
           # loop over all supported debian releases
-          for release in 'trixie' 'bookworm' 'bullseye'; do
+          for release in 'bullseye' 'bookworm' 'trixie'; do
             for deb in ./debian_*.deb; do
               reprepro -Vb ./debian -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
 
           # loop over all supported ubuntu releases
-          for release in 'jammy' 'mantic' 'noble'; do
+          for release in 'jammy' 'noble' 'questing'; do
             for deb in ./ubuntu_*.deb; do
               reprepro -Vb ./ubuntu -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
