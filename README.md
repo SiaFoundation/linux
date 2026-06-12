@@ -7,6 +7,7 @@ The following packages are supported
 
 - [renterd](https://github.com/SiaFoundation/renterd)
 - [hostd](https://github.com/SiaFoundation/hostd)
+- [walletd](https://github.com/SiaFoundation/walletd)
 
 ## Adding the Repository
 
