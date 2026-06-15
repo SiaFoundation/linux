@@ -77,14 +77,15 @@ commands with a different package name.
 ### s3d
 
 s3d needs to be registered with the indexer before the daemon can start.
-After installing and configuring it, run the following commands once before
-enabling the service:
+`s3d login` walks you through the initial configuration and registers this
+instance with the indexer. Run the following commands once before enabling the
+service:
 
 ```bash
-# register this s3d instance with the indexer
-$ s3d login
+# configure s3d and register it with the indexer
+$ sudo s3d login
 
 # create a user and an S3 access key
-$ s3d users create <username>
-$ s3d keys create <username>
+$ sudo s3d users create <username>
+$ sudo s3d keys create <username>
 ```
