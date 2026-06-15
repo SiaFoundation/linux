@@ -1,0 +1,64 @@
+#!/bin/sh
+set -e
+
+PKG=@PKG_NAME@
+UNIT=@PKG_NAME@.service
+LEGACY_UNIT=/etc/systemd/system/$UNIT
+MARKER=/run/sia-linux/$PKG.legacy-upgrade
+
+# config exists if the daemon wrote it in either supported place.
+config_present() {
+    [ -f "/var/lib/$PKG/$PKG.yml" ] || [ -f "/etc/$PKG/$PKG.yml" ]
+}
+
+case "$1" in
+configure)
+    # put back a user-edited old unit.
+    # keeping it in /etc makes it override our packaged unit.
+    if [ -e "$LEGACY_UNIT.dpkg-bak" ] && [ ! -e "$LEGACY_UNIT" ]; then
+        mv "$LEGACY_UNIT.dpkg-bak" "$LEGACY_UNIT"
+        echo "$PKG: preserved your modified $LEGACY_UNIT" >&2
+        echo "$PKG: it overrides the packaged unit in /usr/lib/systemd/system" >&2
+        echo "$PKG: consider moving your changes to a drop-in via 'systemctl edit $PKG'" >&2
+        echo "$PKG: and removing $LEGACY_UNIT to use the packaged unit" >&2
+    fi
+
+    if [ -d /run/systemd/system ]; then
+        systemctl daemon-reload || true
+
+        if [ -e "$MARKER" ]; then
+            # first upgrade from the old layout.
+            # we cannot know if it used to run, so only start it when config exists.
+            if config_present; then
+                systemctl enable "$UNIT" 2>/dev/null || true
+                # old systemd cannot enable this preserved unit.
+                # create the wants link ourselves.
+                if ! systemctl is-enabled --quiet "$UNIT" 2>/dev/null && [ -e "$LEGACY_UNIT" ]; then
+                    mkdir -p /etc/systemd/system/multi-user.target.wants || true
+                    ln -sf "$LEGACY_UNIT" "/etc/systemd/system/multi-user.target.wants/$UNIT" || true
+                    systemctl daemon-reload || true
+                fi
+                systemctl restart "$UNIT" || true
+            fi
+        elif [ -n "$2" ]; then
+            # normal upgrade or reinstall: restart if running, do not change enablement.
+            systemctl try-restart "$UNIT" || true
+        fi
+        # fresh installs stay off until the admin creates config.
+    fi
+    rm -f "$MARKER"
+
+    # no config on a fresh install: show the setup hint.
+    if [ -z "${2:-}" ] && ! config_present; then
+        echo "$PKG: run '$PKG config' to set your wallet seed and password, then 'systemctl enable --now $PKG'" >&2
+    fi
+
+    if [ -f "/var/lib/$PKG/$PKG.yml" ]; then
+        echo "$PKG: note: /var/lib/$PKG/$PKG.yml exists and takes precedence over /etc/$PKG/$PKG.yml" >&2
+    fi
+    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+esac
+
+exit 0

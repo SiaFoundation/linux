@@ -1,0 +1,13 @@
+# test image with systemd.
+# plain debian and ubuntu images do not boot an init system.
+ARG BASE_IMAGE=debian:bookworm
+FROM ${BASE_IMAGE}
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends systemd systemd-sysv logrotate ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+# older systemd can wait forever for serial consoles, especially hvc0 on macOS.
+RUN systemctl mask getty.target console-getty.service \
+    && ln -s /dev/null /etc/systemd/system/serial-getty@.service
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]

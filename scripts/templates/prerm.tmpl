@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+remove)
+    if [ -d /run/systemd/system ]; then
+        systemctl disable --now @PKG_NAME@.service || true
+    fi
+    ;;
+upgrade|deconfigure)
+    # nothing on upgrade.
+    # postinst restarts it after the new version is unpacked.
+    ;;
+failed-upgrade)
+    # the old prerm ran systemctl without checking for systemd.
+    # exit cleanly here so dpkg can keep going.
+    ;;
+esac
+
+exit 0

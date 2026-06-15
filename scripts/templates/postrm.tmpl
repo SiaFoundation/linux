@@ -1,0 +1,45 @@
+#!/bin/sh
+set -e
+
+PKG=@PKG_NAME@
+LEGACY_UNIT=/etc/systemd/system/$PKG.service
+
+reload_systemd() {
+    if [ -d /run/systemd/system ]; then
+        systemctl daemon-reload || true
+    fi
+}
+
+case "$1" in
+remove)
+    rm -f "/run/sia-linux/$PKG.legacy-upgrade"
+    reload_systemd
+    ;;
+upgrade)
+    # also covers downgrade to old packages, which cannot reload systemd themselves.
+    reload_systemd
+    ;;
+purge)
+    rm -f "/run/sia-linux/$PKG.legacy-upgrade"
+    # cleanup in case prerm missed a service enable symlink.
+    rm -f "/etc/systemd/system/"*.wants/"$PKG.service"
+    # old preserved units point at a binary that is gone now.
+    rm -f "$LEGACY_UNIT" "$LEGACY_UNIT.dpkg-bak"
+    # purge means wipe logs, config, and data.
+    rm -rf "/var/log/$PKG" "/etc/$PKG" "/var/lib/$PKG"
+    reload_systemd
+    ;;
+abort-upgrade)
+    # failed upgrade rollback: put the hidden unit back for the old package.
+    if [ -e "$LEGACY_UNIT.dpkg-bak" ] && [ ! -e "$LEGACY_UNIT" ]; then
+        mv "$LEGACY_UNIT.dpkg-bak" "$LEGACY_UNIT"
+    fi
+    rm -f "/run/sia-linux/$PKG.legacy-upgrade"
+    # old packages have no postinst, so reload systemd here.
+    reload_systemd
+    ;;
+abort-install|failed-upgrade|disappear)
+    ;;
+esac
+
+exit 0
