@@ -79,8 +79,8 @@ commands with a different package name.
 
 s3d needs to be registered with the indexer before the daemon can start.
 `s3d login` walks you through the initial configuration and registers this
-instance with the indexer. Run the following commands once before enabling the
-service:
+instance with the indexer. Run the following commands once to register this
+instance and start the service:
 
 ```bash
 # configure s3d and register it with the indexer
@@ -89,4 +89,7 @@ $ sudo s3d login
 # create a user and an S3 access key
 $ sudo s3d users create <username>
 $ sudo s3d keys create <username>
+
+# enable s3d systemd service
+$ sudo systemctl enable --now s3d
 ```
