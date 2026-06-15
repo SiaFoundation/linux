@@ -8,6 +8,7 @@ The following packages are supported
 - [renterd](https://github.com/SiaFoundation/renterd)
 - [hostd](https://github.com/SiaFoundation/hostd)
 - [s3d](https://github.com/SiaFoundation/s3d)
+- [walletd](https://github.com/SiaFoundation/walletd)
 
 ## Adding the Repository
 
