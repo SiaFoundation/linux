@@ -16,8 +16,9 @@ deb() {
 }
 
 install_deb() {
-    DEBIAN_FRONTEND=noninteractive apt-get install -y "$1" > /dev/null 2>&1 \
-        || fail "failed to install $1"
+    local out
+    out=$(DEBIAN_FRONTEND=noninteractive apt-get install -y "$1" 2>&1) \
+        || { echo "$out" >&2; fail "failed to install $1"; }
 }
 
 assert_file() {

@@ -99,12 +99,20 @@ install -dm755 "$STAGE/var/lib/$PKG_NAME"
 install -dm755 "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME"
 render "$TEMPLATES/copyright.tmpl" > "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/copyright"
 chmod 644 "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/copyright"
+# dpkg treats a version containing a hyphen as non native, which must name its
+# changelog changelog.Debian.gz; versions without one use changelog.gz.
+case "$VERSION" in
+*-*) CHANGELOG=changelog.Debian.gz ;;
+*)   CHANGELOG=changelog.gz ;;
+esac
+# honor SOURCE_DATE_EPOCH so identical inputs produce a byte identical package
+CHANGELOG_DATE=$(date -R -u -d "@${SOURCE_DATE_EPOCH:-$(date +%s)}")
 {
     printf '%s (%s) stable; urgency=medium\n\n' "$PKG_DEBIAN_NAME" "$VERSION"
     printf '  * Packaged upstream release %s.\n\n' "$VERSION"
-    printf ' -- The Sia Foundation <hello@sia.tech>  %s\n' "$(date -R -u)"
-} | gzip -9n > "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/changelog.gz"
-chmod 644 "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/changelog.gz"
+    printf ' -- The Sia Foundation <hello@sia.tech>  %s\n' "$CHANGELOG_DATE"
+} | gzip -9n > "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/$CHANGELOG"
+chmod 644 "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME/$CHANGELOG"
 
 # control
 PKG_INSTALLED_SIZE=$(du -sk "$STAGE" | cut -f1)

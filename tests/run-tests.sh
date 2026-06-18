@@ -31,6 +31,18 @@ arm64|aarch64) ARCH=arm64 ;;
 *) echo "unsupported host architecture: $(uname -m)" >&2; exit 1 ;;
 esac
 
+# the scenarios derive the apt package name and doc dir from the project name,
+# so they cannot drive a package whose debian name differs (s3d ships as sia-s3d).
+ENV_FILE="$ROOT/packages/$PROJECT/package.env"
+if [ -f "$ENV_FILE" ]; then
+    # shellcheck source=/dev/null
+    DEBIAN_NAME=$(. "$ENV_FILE"; echo "${PKG_DEBIAN_NAME:-$PKG_NAME}")
+    if [ "$DEBIAN_NAME" != "$PROJECT" ]; then
+        echo "scenarios do not support split package names yet ($DEBIAN_NAME != $PROJECT)" >&2
+        exit 1
+    fi
+fi
+
 echo "== building stub daemon for linux/$ARCH"
 mkdir -p "$ROOT/dist"
 # stripped like the release binaries so lintian sees the same shape

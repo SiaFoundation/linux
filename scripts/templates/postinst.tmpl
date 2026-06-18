@@ -39,6 +39,8 @@ configure)
                     systemctl daemon-reload || true
                 fi
                 systemctl restart "$UNIT" || true
+            else
+                echo "$PKG: service was not restarted because no config was found; run 'systemctl enable --now $PKG' if it should be running" >&2
             fi
         elif [ -n "$2" ]; then
             # normal upgrade or reinstall: restart if running, do not change enablement.
@@ -50,7 +52,7 @@ configure)
 
     # no config on a fresh install: show the setup hint.
     if [ -z "${2:-}" ] && ! config_present; then
-        echo "$PKG: run '$PKG config' to set your wallet seed and password, then 'systemctl enable --now $PKG'" >&2
+        echo "$PKG: run '$PKG config' to configure it, then 'systemctl enable --now $PKG'" >&2
     fi
 
     if [ -f "/var/lib/$PKG/$PKG.yml" ]; then

@@ -1,6 +1,6 @@
 # Packaging tests
 
-The suite verifies the .deb packages end to end: install layout, conffile
+The suite verifies the .deb packages end to end: install layout, config
 preservation, upgrades, migration from the legacy packages, removal, and
 lintian cleanliness. Each scenario runs inside a fresh systemd enabled
 container, and the packages under test are built inside the container by the
