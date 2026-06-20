@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# fresh install: files land in the right places, the package ships no config
-# or conffiles, the service stays disabled until the admin opts in
+# fresh install: correct layout, no shipped config or conffiles, service stays
+# off until the admin enables it.
 # shellcheck source=tests/scenarios/helpers.sh
 . /work/tests/scenarios/helpers.sh
 
@@ -14,15 +14,15 @@ assert_dir "/var/lib/$PKG"
 assert_file "/usr/share/doc/$PKG/copyright"
 assert_file "/usr/share/doc/$PKG/changelog.gz"
 
-# config is made by "$PKG config", not shipped in the package.
+# the package ships no config and no logrotate rule; the daemon writes its config.
 assert_no_path "/etc/$PKG/$PKG.yml"
 assert_no_path "/etc/logrotate.d/$PKG"
 
-# no dpkg-managed config files.
+# dpkg registers no conffiles.
 conffiles=$(dpkg-query -W -f='${Conffiles}' "$PKG" | tr -d '[:space:]')
 [ -z "$conffiles" ] || fail "package should register no conffiles, got: $conffiles"
 
-# pristine install should verify cleanly.
+# a pristine install verifies cleanly.
 dpkg -V "$PKG" || fail "dpkg -V reported differences on a pristine install"
 
 # service stays off by default.

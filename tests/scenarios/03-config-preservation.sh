@@ -6,7 +6,7 @@
 
 install_deb "$(deb 1.0.0)"
 
-# fake what "$PKG config" and "systemctl edit" would create.
+# create the files "$PKG config" and "systemctl edit" would write.
 mkdir -p "/etc/$PKG"
 printf 'directory: /var/lib/%s\n# local change\n' "$PKG" > "/etc/$PKG/$PKG.yml"
 mkdir -p "/etc/systemd/system/$PKG.service.d"

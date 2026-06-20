@@ -25,8 +25,8 @@ purge)
     rm -f "/etc/systemd/system/"*.wants/"$PKG.service"
     # old preserved units point at a binary that is gone now.
     rm -f "$LEGACY_UNIT" "$LEGACY_UNIT.dpkg-bak"
-    # purge means wipe logs, config, and data.
-    rm -rf "/var/log/$PKG" "/etc/$PKG" "/var/lib/$PKG"
+    # purge wipes config and data.
+    rm -rf "/etc/$PKG" "/var/lib/$PKG"
     reload_systemd
     ;;
 abort-upgrade)

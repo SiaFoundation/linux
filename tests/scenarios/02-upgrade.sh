@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# upgrade: running service restarts, but enabled/disabled state stays as-is.
+# upgrade restarts a running service but keeps its enabled/disabled state.
 # shellcheck source=tests/scenarios/helpers.sh
 . /work/tests/scenarios/helpers.sh
 

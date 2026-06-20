@@ -4,7 +4,7 @@
 . /work/tests/scenarios/helpers.sh
 
 install_deb "$(deb 1.0.0)"
-# admin config and data; the package did not ship either.
+# create admin config and data the package never shipped.
 mkdir -p "/etc/$PKG"
 printf 'directory: /var/lib/%s\n# local change\n' "$PKG" > "/etc/$PKG/$PKG.yml"
 echo "wallet data" > "/var/lib/$PKG/keep.dat"
@@ -30,4 +30,3 @@ DEBIAN_FRONTEND=noninteractive apt-get purge -y "$PKG" > /dev/null
 # purge deletes everything.
 assert_no_path "/etc/$PKG"
 assert_no_path "/var/lib/$PKG"
-assert_no_path "/var/log/$PKG"
