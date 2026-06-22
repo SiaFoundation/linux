@@ -17,9 +17,8 @@ on:
         required: true
         default: 'main'
       description:
-        description: 'Description of the project'
-        required: true
-        default: 'Renterd: The Next-Gen Sia Renter'
+        description: 'Unused, kept for dispatch compatibility. Descriptions live in packages/<project>/package.env'
+        required: false
       workflow_id:
         description: 'Workflow ID from which to download the artifact'
         required: true
@@ -35,39 +34,23 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # Use oldest supported versions of each distro
-        include:
-          # Debian 11
-          - distro: 'debian'
-            release: 'bullseye'
-          # Ubuntu 22.04.5
-          - distro: 'ubuntu'
-            release: 'jammy'
-    container:
-      image: ${{ matrix.distro }}:${{ matrix.release }}
     steps:
       - name: Store input in env
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "RELEASE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
             echo "PROJECT=${{ github.event.inputs.project }}" >> $GITHUB_ENV
-            echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
             echo "WORKFLOW_ID=${{ github.event.inputs.workflow_id }}" >> $GITHUB_ENV
             echo "RELEASE_COMPONENT=${{ github.event.inputs.component }}" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" = "repository_dispatch" ]; then
             echo "RELEASE_TAG=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
             echo "PROJECT=${{ github.event.client_payload.project }}" >> $GITHUB_ENV
-            echo "DESCRIPTION=${{ github.event.client_payload.description }}" >> $GITHUB_ENV
             echo "WORKFLOW_ID=${{ github.event.client_payload.workflow_id }}" >> $GITHUB_ENV
             echo "RELEASE_COMPONENT=${{ github.event.client_payload.component }}" >> $GITHUB_ENV
           fi
-          echo "Building ${{ env.PROJECT}} .deb packages for tag ${{ env.RELEASE_TAG }}"
 
-      - name: Install dependencies
-        run: |
-          apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC  apt-get -y install unzip dpkg-dev git
+      - name: Checkout repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Download release artifacts from workflow
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
@@ -83,69 +66,30 @@ jobs:
         shell: bash
         run: |
           TAG=${{ env.RELEASE_TAG }}
-          if [ "${{env.RELEASE_COMPONENT}}" = "nightly" ]; then
+          if [ "${{ env.RELEASE_COMPONENT }}" = "nightly" ]; then
             VERSION=$(date +%Y%m%d)-${{ env.RELEASE_TAG }}
           else
             VERSION=${TAG:1}
           fi
 
+          # one deb per architecture, included into both the debian and the
+          # ubuntu tree. build-deb.sh forces xz compression so the packages
+          # stay installable on every supported release
           for arch in amd64 arm64; do
-            BUILD_NAME=${{ matrix.distro }}_${{ env.PROJECT }}_${VERSION}_${arch}
-
-            # Create the directory structure for the .deb package
-            mkdir -p ${BUILD_NAME}/DEBIAN
-            mkdir -p ${BUILD_NAME}/usr/bin
-            mkdir -p ${BUILD_NAME}/var/lib/${{ env.PROJECT }}
-            mkdir -p ${BUILD_NAME}/etc/systemd/system
-
-            # Copy the ${{ env.PROJECT }} binary
             unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
-            cp ./artifacts/${arch}/${{ env.PROJECT }} ${BUILD_NAME}/usr/bin/${{ env.PROJECT }}
-
-            # Create the control file
-            echo "Package: ${{ env.PROJECT }}" > ${BUILD_NAME}/DEBIAN/control
-            echo "Version: $VERSION" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Architecture: ${arch}" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Maintainer: The Sia Foundation <hello@sia.tech>" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Priority: optional" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Section: net" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Description: ${DESCRIPTION}" >> ${BUILD_NAME}/DEBIAN/control
-            echo "Homepage: https://github.com/SiaFoundation/${{ env.PROJECT }}" >> ${BUILD_NAME}/DEBIAN/control
-
-            # Create systemd service file
-            echo "[Unit]" > ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "Description=${DESCRIPTION}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "After=network.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-
-            echo "[Service]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "ExecStart=/usr/bin/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "WorkingDirectory=/var/lib/${{ env.PROJECT }}" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "Restart=always" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "RestartSec=15" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "TimeoutStopSec=120" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-
-            echo "[Install]" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "WantedBy=multi-user.target" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-            echo "Alias=${{ env.PROJECT }}.service" >> ${BUILD_NAME}/etc/systemd/system/${{ env.PROJECT }}.service
-
-            # Create the prerem script
-            echo "#!/bin/sh" > ${BUILD_NAME}/DEBIAN/prerm
-            echo "systemctl stop ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-            echo "systemctl disable ${{ env.PROJECT }}.service" >> ${BUILD_NAME}/DEBIAN/prerm
-            chmod +x ${BUILD_NAME}/DEBIAN/prerm
-
-            # Build the .deb file
-            echo "Building ${BUILD_NAME}.deb"
-            dpkg-deb --build ${BUILD_NAME}
+            ./scripts/build-deb.sh \
+              --project "${{ env.PROJECT }}" \
+              --version "$VERSION" \
+              --arch "$arch" \
+              --binary "./artifacts/${arch}/${{ env.PROJECT }}" \
+              --output ./dist
           done
 
-      - name: upload deb packages
+      - name: Upload deb packages
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: ${{ matrix.distro }}
-          path: '*.deb'
+          name: debs
+          path: dist/*.deb
 
   create-pull-request:
     needs: build
@@ -167,12 +111,12 @@ jobs:
           sudo apt-get update && sudo apt-get -y install reprepro
 
       - name: Checkout repo
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Download deb packages
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          merge-multiple: true
+          name: debs
 
       - name: Import GPG Key
         run: |
@@ -181,16 +125,15 @@ jobs:
       - name: Add packages to repository
         shell: bash
         run: |
-          # loop over all supported debian releases
+          # the same debs go into both trees
           for release in 'bullseye' 'bookworm' 'trixie'; do
-            for deb in ./debian_*.deb; do
+            for deb in ./*.deb; do
               reprepro -Vb ./debian -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
 
-          # loop over all supported ubuntu releases
           for release in 'jammy' 'noble' 'questing'; do
-            for deb in ./ubuntu_*.deb; do
+            for deb in ./*.deb; do
               reprepro -Vb ./ubuntu -C ${{ env.RELEASE_COMPONENT }} includedeb ${release} $deb
             done
           done
