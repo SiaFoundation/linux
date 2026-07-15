@@ -7,6 +7,7 @@ The following packages are supported
 
 - [renterd](https://github.com/SiaFoundation/renterd)
 - [hostd](https://github.com/SiaFoundation/hostd)
+- [sia-s3d](https://github.com/SiaFoundation/s3d)
 - [walletd](https://github.com/SiaFoundation/walletd)
 
 ## Adding the Repository
@@ -73,3 +74,25 @@ $ sudo systemctl enable --now hostd
 
 If you want to install a different package just replace `hostd` in the
 commands with a different package name.
+
+### s3d
+
+Install this package with `sudo apt install sia-s3d`. The command and systemd
+service are named `s3d`.
+
+s3d needs to be registered with the indexer before the daemon can start.
+`s3d login` walks you through the initial configuration and registers this
+instance with the indexer. Run the following commands once to register this
+instance and start the service:
+
+```bash
+# configure s3d and register it with the indexer
+$ sudo s3d login
+
+# create a user and an S3 access key
+$ sudo s3d users create <username>
+$ sudo s3d keys create <username>
+
+# enable s3d systemd service
+$ sudo systemctl enable --now s3d
+```
