@@ -1,0 +1,78 @@
+name: Test
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: shellcheck
+        run: shellcheck -x scripts/build-deb.sh tests/run-tests.sh tests/lib.sh tests/container-prep.sh tests/build-legacy-deb.sh tests/scenarios/*.sh
+
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version: "1.26"
+      - run: go vet ./...
+      - run: go test ./...
+
+  build-packages:
+    name: Build all packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version: "1.26"
+      - name: Build stub binaries
+        run: |
+          for arch in amd64 arm64; do
+            CGO_ENABLED=0 GOOS=linux GOARCH="$arch" go build -trimpath -ldflags '-s -w' -o "dist/stub-$arch" ./tests/stub
+          done
+      - name: Build every package definition
+        run: |
+          for env in packages/*/package.env; do
+            project=$(basename "$(dirname "$env")")
+            for arch in amd64 arm64; do
+              ./scripts/build-deb.sh --project "$project" --version 0.0.1 --arch "$arch" --binary "dist/stub-$arch" --output dist
+            done
+          done
+          ls -l dist/*.deb
+      - name: Assert package contents are owned by root
+        run: |
+          # the runner is not root, so this catches a dropped
+          # --root-owner-group in build-deb.sh that other gates miss because
+          # they build debs as root inside the test containers
+          for deb in dist/*.deb; do
+            if dpkg-deb -c "$deb" | awk '{print $2}' | grep -vqx 'root/root'; then
+              echo "non root owner in $deb" >&2
+              dpkg-deb -c "$deb" >&2
+              exit 1
+            fi
+          done
+
+  test-packages:
+    name: Test packages
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # oldest and newest of each distro bracket the systemd and dpkg
+        # version spread
+        image:
+          - debian:bullseye
+          - debian:trixie
+          - ubuntu:jammy
+          - ubuntu:questing
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version: "1.26"
+      - name: Run packaging tests
+        run: tests/run-tests.sh --image ${{ matrix.image }} --project hostd
