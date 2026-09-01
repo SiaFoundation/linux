@@ -29,24 +29,6 @@ sudo curl -fsSL https://linux.sia.tech/<distro>/gpg | sudo gpg --dearmor -o /usr
 echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/<distro> <release> main" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
 ```
 
-### Release Channels
-
-We also provide beta and nightly releases for those who want to test the latest
-features and improvements. 
-
-- Beta releases are release candidates that should be stable but have not been tested as thoroughly as the main releases.
-- Nightly releases are built from the latest master branch and are not guaranteed to be stable.
-
-To use these releases, replace `main` in the above command with `beta` or `nightly`. 
-
-```bash
-echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/<distro> <release> beta" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
-```
-or
-```bash
-echo "deb [signed-by=/usr/share/keyrings/siafoundation.gpg] https://linux.sia.tech/<distro> <release> nightly" | sudo tee -a /etc/apt/sources.list.d/siafoundation.list
-```
-
 ## Installing Packages
 
 After that, you can install any of the available packages (e.g. `hostd`) like this:
