@@ -39,9 +39,9 @@ jobs:
       matrix:
         # Use oldest supported versions of each distro
         include:
-          # Debian 11
+          # Debian 12
           - distro: 'debian'
-            release: 'bullseye'
+            release: 'bookworm'
           # Ubuntu 22.04.5
           - distro: 'ubuntu'
             release: 'jammy'
