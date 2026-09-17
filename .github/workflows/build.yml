@@ -69,6 +69,9 @@ jobs:
         run: |
           apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC  apt-get -y install unzip dpkg-dev git
 
+      - name: Checkout repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
       - name: Download release artifacts from workflow
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -87,6 +90,25 @@ jobs:
             VERSION=$(date +%Y%m%d)-${{ env.RELEASE_TAG }}
           else
             VERSION=${TAG:1}
+          fi
+
+          # projects with a package definition build through scripts/build-deb.sh.
+          # the rest keep the inline assembly below until they are migrated.
+          if [ -f "packages/${{ env.PROJECT }}/package.env" ]; then
+            for arch in amd64 arm64; do
+              unzip ./artifacts/${{ env.PROJECT }}_linux_${arch}.zip -d ./artifacts/${arch}/
+              ./scripts/build-deb.sh \
+                --project "${{ env.PROJECT }}" \
+                --version "$VERSION" \
+                --arch "$arch" \
+                --binary "./artifacts/${arch}/${{ env.PROJECT }}" \
+                --output ./dist
+            done
+            # the publish job sorts packages into the two trees by this prefix
+            for deb in ./dist/*.deb; do
+              mv "$deb" "./${{ matrix.distro }}_$(basename "$deb")"
+            done
+            exit 0
           fi
 
           for arch in amd64 arm64; do
