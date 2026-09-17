@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+UNIT=@PKG_NAME@.service
+
+case "$1" in
+configure)
+    if [ -d /run/systemd/system ]; then
+        systemctl daemon-reload || true
+
+        # fresh installs stay off until the admin configures the daemon.
+        if [ -n "${2:-}" ]; then
+            systemctl try-restart "$UNIT" || true
+        fi
+    fi
+    ;;
+esac
+
+exit 0
