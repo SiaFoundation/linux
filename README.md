@@ -3,6 +3,21 @@ The official source of all available Linux packages of Sia software
 
 As of this moment only Debian and other distros using 'Apt' as their package manager are supported.
 
+## Quick Install
+
+```bash
+# install hostd
+curl -fsSL https://linux.sia.tech/install.sh | sh
+
+# install another daemon
+curl -fsSL https://linux.sia.tech/install.sh | sh -s -- renterd
+```
+
+The script adds the repository, installs the package, and stops there. It does
+not enable or start anything. Read it first at
+[linux.sia.tech/install.sh](https://linux.sia.tech/install.sh) if you would
+rather not pipe it to a shell.
+
 The following packages are supported
 
 - [renterd](https://github.com/SiaFoundation/renterd)

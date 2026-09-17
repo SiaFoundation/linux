@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"mime"
 	"net"
 	"net/http"
 	"os"
@@ -42,6 +43,12 @@ func runServer(ctx context.Context) error {
 }
 
 func main() {
+	// the host mime table decides the type of .sh otherwise, and a download
+	// prompt defeats reading the install script before running it.
+	if err := mime.AddExtensionType(".sh", "text/plain; charset=utf-8"); err != nil {
+		log.Println("failed to register mime type:", err)
+	}
+
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer cancel()
 

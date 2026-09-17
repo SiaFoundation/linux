@@ -33,4 +33,6 @@ func TestPackagesFS(t *testing.T) {
 	assertFile(t, "ubuntu/gpg")
 	assertFile(t, "debian/db/checksums.db")
 	assertFile(t, "ubuntu/db/checksums.db")
+	assertFile(t, "index.html")
+	assertFile(t, "install.sh")
 }
