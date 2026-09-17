@@ -18,7 +18,6 @@ their corresponding release.
 - `debian`
     - `trixie`
     - `bookworm`
-    - `bullseye`
 - `ubuntu`
     - `resolute`
     - `questing`
