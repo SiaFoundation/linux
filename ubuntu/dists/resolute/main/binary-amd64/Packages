@@ -1,0 +1,42 @@
+Package: hostd
+Version: 2.10.3
+Architecture: amd64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/main/h/hostd/hostd_2.10.3_amd64.deb
+Size: 9778966
+SHA256: 714bb9f96fba1cfdb5e6d203a2c23fd344f0729c75e030de8b46474475e5dc9e
+SHA1: d0a1a74c341b8e03c06a3d70c7e6be16eaf41d46
+MD5sum: b1551231bc240676ec48d915333e342a
+Description: hostd: the next generation Sia host
+Homepage: https://github.com/SiaFoundation/hostd
+
+Package: renterd
+Version: 2.9.4
+Architecture: amd64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/main/r/renterd/renterd_2.9.4_amd64.deb
+Size: 9104822
+SHA256: ecd810e05ac7e3db7be8f5ad0f804d8c541f655924ba2bfc0093793eeda25824
+SHA1: dd114bead0e2ab12050aa294777b62ce6100c406
+MD5sum: a78cd59add86c5176e113da9c73457ea
+Description: Renterd: The Next-Gen Sia Renter
+Homepage: https://github.com/SiaFoundation/renterd
+
+Package: walletd
+Version: 2.15.2
+Architecture: amd64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/main/w/walletd/walletd_2.15.2_amd64.deb
+Size: 14434188
+SHA256: 3e5c3f6073c47dccd756790eadb7e4b201fdc7bcb3c5529b2c1b684f10ccbacf
+SHA1: 774e63096249d10eb38d903eb25d267acf83d26f
+MD5sum: 97a91978085b2676a5a7136bf65871a9
+Description: walletd: The next generation Sia wallet
+Homepage: https://github.com/SiaFoundation/walletd
+
