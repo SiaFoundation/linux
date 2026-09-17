@@ -1,0 +1,101 @@
+name: Copy Suite
+
+# Populates a newly added suite by copying packages from an existing one.
+#
+# reprepro's `copy` promotes packages between suites by reference, reusing the
+# files already in pool/. Re-running the release build instead would rebuild the
+# .deb from scratch, and since that is not byte-reproducible reprepro refuses to
+# overwrite the existing pool file:
+#   "Already existing files can only be included again, if they are the same"
+
+on:
+  workflow_dispatch:
+    inputs:
+      distro:
+        description: 'Which repository to operate on'
+        required: true
+        type: choice
+        options:
+          - ubuntu
+          - debian
+      source:
+        description: 'Suite to copy packages from (e.g. questing)'
+        required: true
+      target:
+        description: 'Suite to copy packages into (e.g. resolute)'
+        required: true
+      component:
+        description: 'The release component (main, beta, or nightly)'
+        required: true
+        default: 'main'
+      packages:
+        description: 'Space separated package names'
+        required: true
+        default: 'hostd renterd walletd'
+
+# Shares build.yml's concurrency group: both mutate the same reprepro
+# databases, so they must never run at the same time.
+concurrency:
+  group: Build .deb Packages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  copy-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get -y install reprepro
+
+      - name: Checkout repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Import GPG Key
+        run: |
+          echo "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --import
+
+      - name: Copy packages between suites
+        shell: bash
+        env:
+          DISTRO: ${{ inputs.distro }}
+          SOURCE: ${{ inputs.source }}
+          TARGET: ${{ inputs.target }}
+          COMPONENT: ${{ inputs.component }}
+          PACKAGES: ${{ inputs.packages }}
+        run: |
+          # PACKAGES is deliberately unquoted: it is a space separated list and
+          # each name must reach reprepro as its own argument.
+          # shellcheck disable=SC2086
+          reprepro -Vb ./"$DISTRO" -C "$COMPONENT" copy "$TARGET" "$SOURCE" $PACKAGES
+
+          echo "### $DISTRO/$TARGET" >> "$GITHUB_STEP_SUMMARY"
+          reprepro -b ./"$DISTRO" -C "$COMPONENT" list "$TARGET" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mint bot token
+        id: bot-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.SIA_CI_BOT_APP_ID }}
+          private-key: ${{ secrets.SIA_CI_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        id: create_pr
+        with:
+          token: ${{ steps.bot-token.outputs.token }}
+          delete-branch: true
+          commit-message: '${{ inputs.distro }}: populate ${{ inputs.target }} from ${{ inputs.source }}'
+          title: '${{ inputs.distro }} (${{ inputs.component }}): populate ${{ inputs.target }}'
+          body: |
+            Automated PR copying `${{ inputs.packages }}` from `${{ inputs.source }}`
+            into `${{ inputs.target }}` in the ${{ inputs.distro }} repository.
+
+            Packages are promoted by reference, so no files are added to `pool/`.
+          branch: ${{ inputs.distro }}/populate/${{ inputs.target }}
+          base: master
