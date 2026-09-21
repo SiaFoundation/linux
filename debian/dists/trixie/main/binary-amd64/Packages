@@ -1,15 +1,15 @@
 Package: hostd
-Version: 2.10.3
+Version: 2.11.0
 Architecture: amd64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/main/h/hostd/hostd_2.10.3_amd64.deb
-Size: 9255368
-SHA256: 290584825cf993ebc6a4fdf8cb9cdbdf2628449d537302b43a4cc93fb680d905
-SHA1: 409c8c85745096a7c8d4848795352fbb5c8e6da9
-MD5sum: 244287fcdf138c10fd56e6fb6992e4eb
-Description: hostd: the next generation Sia host
+Filename: pool/main/h/hostd/hostd_2.11.0_amd64.deb
+Size: 8297928
+SHA256: d19f098e3d2b17251726d49c4a4cf6d297588911a946a44e9b4bf2de9fbae3b3
+SHA1: 71c0d4365bd824155f74624e67e38a43361e999d
+MD5sum: 36d7a6dd32126536284b6545a9c0d41f
+Description: hostd: The next generation Sia host
 Homepage: https://github.com/SiaFoundation/hostd
 
 Package: renterd
