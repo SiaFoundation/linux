@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+LEGACY_UNIT=/etc/systemd/system/@PKG_NAME@.service
+MARKER_DIR=/run/sia-linux
+
+case "$1" in
+upgrade)
+    # no vendor unit means we are upgrading from the old /etc layout.
+    # the old prerm already stopped and disabled the service, so postinst decides what to do.
+    if [ ! -e "/usr/lib/systemd/system/@PKG_NAME@.service" ] && [ -f "$LEGACY_UNIT" ] && [ ! -L "$LEGACY_UNIT" ]; then
+        mkdir -p "$MARKER_DIR"
+        : > "$MARKER_DIR/@PKG_NAME@.legacy-upgrade"
+
+        # hash the old unit, ignoring Description because it came from free text.
+        sum=$(grep -v '^Description=' "$LEGACY_UNIT" | md5sum | cut -d' ' -f1)
+        case "$sum" in
+        @PKG_LEGACY_MD5S@)
+            # stock unit: let dpkg remove it so the new vendor unit takes over.
+            ;;
+        *)
+            # changed unit: hide it during unpack, then postinst puts it back.
+            mv "$LEGACY_UNIT" "$LEGACY_UNIT.dpkg-bak"
+            ;;
+        esac
+    fi
+    ;;
+install|abort-upgrade)
+    ;;
+esac
+
+exit 0

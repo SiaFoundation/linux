@@ -1,0 +1,19 @@
+[Unit]
+Description=@PKG_NAME@: @PKG_DESCRIPTION@
+Documentation=@PKG_HOMEPAGE@
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/@PKG_NAME@
+WorkingDirectory=/var/lib/@PKG_NAME@
+StateDirectory=@PKG_NAME@
+ConfigurationDirectory=@PKG_NAME@
+ConfigurationDirectoryMode=0700
+Restart=always
+RestartSec=15
+TimeoutStopSec=120
+
+[Install]
+WantedBy=multi-user.target

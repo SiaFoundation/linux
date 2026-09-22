@@ -1,0 +1,9 @@
+# statically linked go binaries are intentional, the daemons embed their
+# dependencies
+statically-linked-binary
+# the daemons ship no man pages yet
+no-manual-page
+# the packages are built with raw dpkg-deb and have no debhelper tooling,
+# maintainer scripts call systemctl directly behind a /run/systemd/system
+# guard
+maintainer-script-calls-systemctl
