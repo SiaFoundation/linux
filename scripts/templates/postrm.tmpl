@@ -8,6 +8,7 @@ remove|upgrade|purge)
     if [ "$1" = purge ]; then
         rm -f "/etc/systemd/system/"*.wants/"$PKG.service"
         rm -rf "/etc/$PKG" "/var/lib/$PKG"
+        deluser --system --quiet "$PKG" >/dev/null 2>&1 || true
     fi
     if [ -d /run/systemd/system ]; then
         systemctl daemon-reload || true
