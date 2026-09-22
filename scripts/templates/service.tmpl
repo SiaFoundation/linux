@@ -6,6 +6,8 @@ After=network-online.target
 
 [Service]
 Type=exec
+User=@PKG_NAME@
+Group=@PKG_NAME@
 ExecStart=/usr/bin/@PKG_NAME@@PKG_EXEC_ARGS@
 WorkingDirectory=/var/lib/@PKG_NAME@
 Restart=always

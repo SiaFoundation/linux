@@ -65,16 +65,19 @@ Ubuntu already ship an unrelated package called `s3d`.
 
 s3d needs to be registered with the indexer before the daemon can start.
 `s3d login` walks you through the initial configuration and registers this
-instance with the indexer. Run the following commands once to register this
+instance with the indexer. The service runs as the `s3d` user, which owns
+`/etc/s3d` and `/var/lib/s3d`, so run the setup commands as that user and from
+the data directory. s3d probes the working directory for a config file first and
+stops if it cannot read one. Run the following commands once to register this
 instance and start the service:
 
 ```bash
 # configure s3d and register it with the indexer
-$ sudo s3d login
+$ sudo -u s3d sh -c 'cd /var/lib/s3d && s3d login'
 
 # create a user and an S3 access key
-$ sudo s3d users create <username>
-$ sudo s3d keys create <username>
+$ sudo -u s3d sh -c 'cd /var/lib/s3d && s3d users create <username>'
+$ sudo -u s3d sh -c 'cd /var/lib/s3d && s3d keys create <username>'
 
 # enable s3d systemd service
 $ sudo systemctl enable --now s3d

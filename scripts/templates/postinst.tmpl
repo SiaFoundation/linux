@@ -1,10 +1,15 @@
 #!/bin/sh
 set -e
 
-UNIT=@PKG_NAME@.service
+PKG=@PKG_NAME@
+UNIT=$PKG.service
 
 case "$1" in
 configure)
+    # the daemon runs under its own account, so it has to own the state it writes
+    adduser --system --group --no-create-home --home "/var/lib/$PKG" --quiet "$PKG"
+    chown -R "$PKG:$PKG" "/etc/$PKG" "/var/lib/$PKG"
+
     if [ -d /run/systemd/system ]; then
         systemctl daemon-reload || true
 

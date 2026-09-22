@@ -78,6 +78,8 @@ chmod 644 "$STAGE/usr/lib/systemd/system/$PKG_NAME.service"
 
 # the daemon owns config via "<name> config".
 # the package ships no config, so dpkg never overwrites it.
+# the directories are shipped empty so the daemon user can write to them.
+install -dm700 "$STAGE/etc/$PKG_NAME"
 install -dm700 "$STAGE/var/lib/$PKG_NAME"
 
 install -dm755 "$STAGE/usr/share/doc/$PKG_DEBIAN_NAME"
