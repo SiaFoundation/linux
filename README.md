@@ -85,11 +85,4 @@ $ sudo systemctl enable --now s3d
 
 The service logs to the journal, so read it with `journalctl -u s3d`. The unit
 passes `-log.file.enabled=false -log.stdout.enableANSI=false`, which overrides
-the config file. To write a log file instead, run `sudo systemctl edit s3d` and
-add both lines below. The empty one is required before setting a new command.
-
-```ini
-[Service]
-ExecStart=
-ExecStart=/usr/bin/s3d -log.file.enabled=true
-```
+the config file.
