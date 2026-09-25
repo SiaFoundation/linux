@@ -26,6 +26,25 @@ MD5sum: 0ac2617dc686c00d85c85702684a3ea1
 Description: Renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
+Package: sia-s3d
+Version: 0.2.0
+Architecture: arm64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Installed-Size: 13836
+Depends: adduser, ca-certificates
+Conflicts: s3d
+Homepage: https://github.com/SiaFoundation/s3d
+Priority: optional
+Section: net
+Filename: pool/main/s/sia-s3d/sia-s3d_0.2.0_arm64.deb
+Size: 4241508
+SHA256: 4ace66db4cb5448d8a7cfbb77ca25fad0af9685daeedcf6566e9e6919d271567
+SHA1: 507cdc5b8ef86e356824373397f02729cadf6be4
+MD5sum: 7112a46a474a2da75f9b08c99ce72cf8
+Description: S3-compatible gateway for the Sia network
+ s3d translates the AWS S3 API to the Sia storage network. Applications that
+ speak S3 can store data on Sia without modification.
+
 Package: walletd
 Version: 2.15.2
 Architecture: arm64
