@@ -24,17 +24,11 @@ on:
         description: 'Workflow ID from which to download the artifact'
         required: true
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
-
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         # Use oldest supported versions of each distro
@@ -176,6 +170,9 @@ jobs:
   create-pull-request:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
     steps:
       - name: Store input in env
         run: |
@@ -191,6 +188,22 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt-get update && sudo apt-get -y install reprepro
+
+      # runs are serialized here rather than with a concurrency group: a group
+      # keeps only one pending run and cancels the rest, which would drop releases.
+      - name: Wait for earlier runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          while true; do
+            pending=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow build.yml --limit 100 --json number,status \
+              --jq '[.[] | select(.number < ${{ github.run_number }} and .status != "completed")] | length')
+            if [ "$pending" = "0" ]; then
+              break
+            fi
+            echo "waiting on $pending earlier run(s)"
+            sleep 30
+          done
 
       - name: Checkout repo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -243,8 +256,8 @@ jobs:
           body: 'This is an automated PR to update ${{ env.PROJECT }} to ${{ env.RELEASE_TAG }}'
           branch: ${{ env.PROJECT }}/update/${{env.RELEASE_COMPONENT }}/${{ env.RELEASE_TAG }}
           base: master
-      - name: Automerge
+      - name: Merge Pull Request
         if: steps.create_pr.outputs.pull-request-number != ''
-        run: gh pr merge --merge --auto "${{ steps.create_pr.outputs.pull-request-number }}"
+        run: gh pr merge --merge --delete-branch "${{ steps.create_pr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ steps.bot-token.outputs.token }}
