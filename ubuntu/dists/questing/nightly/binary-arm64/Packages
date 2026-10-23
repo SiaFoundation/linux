@@ -12,6 +12,20 @@ MD5sum: 0183809d88369119ba45a7a1161a9d7d
 Description: hostd: A host for Sia
 Homepage: https://github.com/SiaFoundation/hostd
 
+Package: renterd
+Version: 20261023-6868385d9b71b60b612b73885566a358a5caad18
+Architecture: arm64
+Maintainer: The Sia Foundation <hello@sia.tech>
+Priority: optional
+Section: net
+Filename: pool/nightly/r/renterd/renterd_20261023-6868385d9b71b60b612b73885566a358a5caad18_arm64.deb
+Size: 8029654
+SHA256: 33ca70e1fa0b3cf2e0a3a801fb4e893dd494945a91926f3d6a17ee76a21456a3
+SHA1: 51bc784e1940e41cbd5257b5fd1ccce1db340680
+MD5sum: 3fd9ee033a1da168eb85d022f63c8611
+Description: renterd: The Next-Gen Sia Renter
+Homepage: https://github.com/SiaFoundation/renterd
+
 Package: sia-s3d
 Version: 20261023-7c340c0e1e955caa9486a5ef0c5dca522799b0df
 Architecture: arm64
