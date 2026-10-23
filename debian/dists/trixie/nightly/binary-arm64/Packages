@@ -13,20 +13,20 @@ Description: hostd: A host for Sia
 Homepage: https://github.com/SiaFoundation/hostd
 
 Package: sia-s3d
-Version: 20261022-ce78b4da536c7e5cbaae12f25f7c6bb64058928b
+Version: 20261023-7c340c0e1e955caa9486a5ef0c5dca522799b0df
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
-Installed-Size: 14932
+Installed-Size: 15000
 Depends: adduser, ca-certificates
 Conflicts: s3d
 Homepage: https://github.com/SiaFoundation/s3d
 Priority: optional
 Section: net
-Filename: pool/nightly/s/sia-s3d/sia-s3d_20261022-ce78b4da536c7e5cbaae12f25f7c6bb64058928b_arm64.deb
-Size: 4558740
-SHA256: ee799acc542a2dab0ba1af67c4e56111f36df978fdf3f5f53719d7d1d6673fcc
-SHA1: 9947dcd7917cdfb6f687001dfaba1e3eb45ffd9e
-MD5sum: 940e243773ade7a8eb5414755a3c28b4
+Filename: pool/nightly/s/sia-s3d/sia-s3d_20261023-7c340c0e1e955caa9486a5ef0c5dca522799b0df_arm64.deb
+Size: 4568944
+SHA256: ee217bd3bb8a4f2308edbccea84dfcf0e45159d114544989ccd81767af0c4180
+SHA1: 47cda5bc8ab60e12abdd8481fe906bf3a1b33629
+MD5sum: 4e4239ff4d619ae068858409e22e60e4
 Description: S3-compatible gateway for the Sia network
  s3d translates the AWS S3 API to the Sia storage network. Applications that
  speak S3 can store data on Sia without modification.
