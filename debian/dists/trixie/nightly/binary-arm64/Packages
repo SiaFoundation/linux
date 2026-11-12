@@ -46,16 +46,16 @@ Description: S3-compatible gateway for the Sia network
  speak S3 can store data on Sia without modification.
 
 Package: walletd
-Version: 20261030-89037c7a917d18bfd93be86617281d12eecb0f67
+Version: 20261112-d9d6987b46fc37f9a15d7a776a6e5ec9707b8e05
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Priority: optional
 Section: net
-Filename: pool/nightly/w/walletd/walletd_20261030-89037c7a917d18bfd93be86617281d12eecb0f67_arm64.deb
-Size: 12921880
-SHA256: 6a219a89d522e77998c4476ac49c8748044560b31cd1bb95789a220568ea27d9
-SHA1: ee62cb6f19b31e2c314a8376d08be5de539edeb3
-MD5sum: c41476cc6d247eef4b63a7363af012be
+Filename: pool/nightly/w/walletd/walletd_20261112-d9d6987b46fc37f9a15d7a776a6e5ec9707b8e05_arm64.deb
+Size: 12928888
+SHA256: d70399fd5e47da32804df5a57e47b62b02e508514c4ae2e0325524fe7dd74e4d
+SHA1: 46fba95bfbf7f350e4c679170aaf8ca6a8acdb76
+MD5sum: ffa51128e1ec6d5c7c7242e2a721389d
 Description: walletd: The new Sia wallet
 Homepage: https://github.com/SiaFoundation/walletd
 
