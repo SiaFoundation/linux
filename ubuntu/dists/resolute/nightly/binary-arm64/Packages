@@ -27,7 +27,7 @@ Description: renterd: The Next-Gen Sia Renter
 Homepage: https://github.com/SiaFoundation/renterd
 
 Package: sia-s3d
-Version: 20261116-4f31f039238671f81194519174b3d79516f01904
+Version: 20261116-a038617cf7a0a3fbae1207ebc33b088eadade446
 Architecture: arm64
 Maintainer: The Sia Foundation <hello@sia.tech>
 Installed-Size: 22020
@@ -36,11 +36,11 @@ Conflicts: s3d
 Homepage: https://github.com/SiaFoundation/s3d
 Priority: optional
 Section: net
-Filename: pool/nightly/s/sia-s3d/sia-s3d_20261116-4f31f039238671f81194519174b3d79516f01904_arm64.deb
-Size: 7093312
-SHA256: acd189033a18a6a9f8f74d07ab938891d376ebdc954b3749ebe9f74704ba7889
-SHA1: e3e415e6277bf7461495076aa3ef5ac7726f94a0
-MD5sum: 3cb06186909c9e4102a8346ff8a3cfa6
+Filename: pool/nightly/s/sia-s3d/sia-s3d_20261116-a038617cf7a0a3fbae1207ebc33b088eadade446_arm64.deb
+Size: 7092904
+SHA256: 34ca2a4ad062489187f78229e2f1074be0fa05b3647a26b325fb066178c479d8
+SHA1: 769d9494805a2d4507953d235f2842e99c4fa9dc
+MD5sum: cf1be3b6dc4b814ac58688979965db38
 Description: S3-compatible gateway for the Sia network
  s3d translates the AWS S3 API to the Sia storage network. Applications that
  speak S3 can store data on Sia without modification.
